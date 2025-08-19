@@ -21,9 +21,6 @@ on:
     - "images/infra-tools/**/*.yaml"
   workflow_dispatch:
 
-env:
-  IMAGE_NAME: infra-tools
-
 permissions:
   contents: read
   packages: write
@@ -41,8 +38,8 @@ jobs:
     name: ${{ matrix.version }}${{ matrix.variant == 'dev' && '-dev' || '' }}
     uses: "./.github/workflows/release.yaml"
     with:
-      repository: nlamirault/distroless/${{ env.IMAGE_NAME }}
-      config-dir: images/${{ env.IMAGE_NAME }}
+      repository: nlamirault/distroless/infra-tools
+      config-dir: images/infra-tools
       tag: ${{ matrix.version }}${{ matrix.variant == 'dev' && '-dev' || '' }}
       target: ${{ matrix.variant }}
     secrets: inherit
