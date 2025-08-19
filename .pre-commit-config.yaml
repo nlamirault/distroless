@@ -101,6 +101,7 @@ repos:
   - id: check-renovate
     name: "✅ renovate / Validate Renovate configuration"
     stages: [pre-commit]
+    additional_dependencies: ["json5"]
 - repo: https://github.com/python-jsonschema/check-jsonschema
   rev: 0.33.2
   hooks:
