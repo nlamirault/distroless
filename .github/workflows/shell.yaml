@@ -4,7 +4,7 @@
 ---
 name: OCI / Shell
 
-on:
+on: # yamllint disable-line rule:truthy
   schedule:
   - cron: "00 01 * * 1"
   push:
