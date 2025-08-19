@@ -65,7 +65,7 @@ cosign verify-attestation \
 
 - **Dev image**
 
-````shell
+```shell
 cosign verify-attestation \
   --type slsaprovenance \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com \
@@ -88,7 +88,7 @@ cosign verify \
   --certificate-oidc-issuer=https://token.actions.githubusercontent.com \
   --certificate-identity=https://github.com/nlamirault/distroless/.github/workflows/release.yaml@refs/heads/main \
   ghcr.io/nlamirault/distroless/infra-tools:latest | jq
-````
+```
 
 - **Shell image**
 
