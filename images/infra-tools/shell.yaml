@@ -2,13 +2,16 @@
 # SPDX-License-Identifier: Apache-2.0
 
 ---
-include: images/infra-tools/shell.yaml
+include: images/infra-tools/prod.yaml
 
 contents:
   packages:
   - apk-tools
+  - build-base
   - git
-  - wolfi-keys
+  - py3-pip
+  - python3-dev
+  - vim
 
 accounts:
   run-as: root

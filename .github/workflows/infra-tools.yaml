@@ -34,12 +34,12 @@ jobs:
     strategy:
       matrix:
         version: [latest]
-        variant: [prod, dev]
-    name: ${{ matrix.version }}${{ matrix.variant == 'dev' && '-dev' || '' }}
+        variant: [prod, shell, dev]
+    name: ${{ matrix.version }}${{ matrix.variant == 'shell' && '-shell' || matrix.variant == 'dev' && '-dev' || '' }}
     uses: "./.github/workflows/release.yaml"
     with:
       repository: nlamirault/distroless/infra-tools
       config-dir: images/infra-tools
-      tag: ${{ matrix.version }}${{ matrix.variant == 'dev' && '-dev' || '' }}
+      tag: ${{ matrix.version }}${{ matrix.variant == 'shell' && '-shell' || matrix.variant == 'dev' && '-dev' || '' }}
       target: ${{ matrix.variant }}
     secrets: inherit

@@ -4,10 +4,10 @@ This image contains all infra tools.
 
 ## Versions
 
-| 📌 Version | ⬇️ Pull URL                                         |
-| ---------- | -------------------------------------------------- |
-| latest     | ghcr.io/gitguardian/wolfi/infra-tools:latest       |
-| latest-dev | ghcr.io/gitguardian/wolfi/infra-tools:latest-shell |
+| 📌 Version | ⬇️ Pull URL                                             |
+| ---------- | ------------------------------------------------------ |
+| latest     | ghcr.io/nlamirault/distroless/infra-tools:latest       |
+| latest-dev | ghcr.io/nlamirault/distroless/infra-tools:latest-shell |
 
 ## ✅ Verify the Provenance
 
@@ -19,16 +19,16 @@ the image:
 
 ```shell
 gh attestation verify \
-  --owner gitguardian \
-  oci://ghcr.io/gitguardian/wolfi/infra-tools:latest
+  --owner nlamirault \
+  oci://ghcr.io/nlamirault/distroless/infra-tools:latest
 ```
 
 - **Shell image**
 
 ```shell
 gh attestation verify \
-  --owner gitguardian \
-  oci://ghcr.io/gitguardian/wolfi/infra-tools:latest-shell
+  --owner nlamirault \
+  oci://ghcr.io/nlamirault/distroless/infra-tools:latest-shell
 ```
 
 ## 📦 **Image Verification**
@@ -46,8 +46,8 @@ following command:
 ```shell
 cosign verify \
   --certificate-oidc-issuer=https://token.actions.githubusercontent.com \
-  --certificate-identity=https://github.com/GitGuardian/wolfi/.github/workflows/release.yaml@refs/heads/main \
-  ghcr.io/gitguardian/wolfi/infra-tools:latest | jq
+  --certificate-identity=https://github.com/nlamirault/distroless/.github/workflows/release.yaml@refs/heads/main \
+  ghcr.io/nlamirault/distroless/infra-tools:latest | jq
 ```
 
 - **Shell image**
@@ -55,8 +55,8 @@ cosign verify \
 ```shell
 cosign verify \
   --certificate-oidc-issuer=https://token.actions.githubusercontent.com \
-  --certificate-identity=https://github.com/GitGuardian/wolfi/.github/workflows/release.yaml@refs/heads/main \
-  ghcr.io/gitguardian/wolfi/infra-tools:latest-shell | jq
+  --certificate-identity=https://github.com/nlamirault/distroless/.github/workflows/release.yaml@refs/heads/main \
+  ghcr.io/nlamirault/distroless/infra-tools:latest-shell | jq
 ```
 
 ### 📦 **Image SBOMs**
@@ -73,8 +73,8 @@ directly from the container registry and can be verified using using
 cosign verify-attestation \
   --type=https://spdx.dev/Document \
   --certificate-oidc-issuer=https://token.actions.githubusercontent.com \
-  --certificate-identity=https://github.com/GitGuardian/wolfi/.github/workflows/release.yaml@refs/heads/main \
-  ghcr.io/gitguardian/wolfi/infra-tools:latest
+  --certificate-identity=https://github.com/nlamirault/distroless/.github/workflows/release.yaml@refs/heads/main \
+  ghcr.io/nlamirault/distroless/infra-tools:latest
 ```
 
 - **Shell image**
@@ -83,8 +83,8 @@ cosign verify-attestation \
 cosign verify-attestation \
   --type=https://spdx.dev/Document \
   --certificate-oidc-issuer=https://token.actions.githubusercontent.com \
-  --certificate-identity=https://github.com/GitGuardian/wolfi/.github/workflows/release.yaml@refs/heads/main \
-  ghcr.io/gitguardian/wolfi/infra-tools:latest-shell
+  --certificate-identity=https://github.com/nlamirault/distroless/.github/workflows/release.yaml@refs/heads/main \
+  ghcr.io/nlamirault/distroless/infra-tools:latest-shell
 ```
 
 This will pull in the signature for the attestation specified by the --type
@@ -92,17 +92,17 @@ parameter, which in this case is the SPDX attestation. You will receive output
 that verifies the SBOM attestation signature in cosign's transparency log:
 
 ```shell
-Verification for ghcr.io/gitguardian/wolfi/infra-tools:latest --
+Verification for ghcr.io/nlamirault/distroless/infra-tools:latest --
 The following checks were performed on each of these signatures:
   - The cosign claims were validated
   - Existence of the claims in the transparency log was verified offline
   - The code-signing certificate was verified using trusted certificate authority certificates
-Certificate subject: https://github.com/GitGuardian/wolfi/.github/workflows/release.yaml@refs/heads/main
+Certificate subject: https://github.com/nlamirault/distroless/.github/workflows/release.yaml@refs/heads/main
 Certificate issuer URL: https://token.actions.githubusercontent.com
 GitHub Workflow Trigger: push
 GitHub Workflow SHA: ced6b3cfab1341509de55bff7c0389ce81f73aae
 GitHub Workflow Name: python
-GitHub Workflow Repository: GitGuardian/wolfi
+GitHub Workflow Repository: nlamirault/distroless
 GitHub Workflow Ref: refs/heads/main
 ...
 ```
@@ -119,7 +119,7 @@ following command will obtain the SBOM for the python image on `linux/amd64`:
 cosign download attestation \
   --platform=linux/amd64 \
   --predicate-type=https://spdx.dev/Document \
-  ghcr.io/gitguardian/wolfi/infra-tools:latest | jq -r .payload | base64 -d | jq .predicate
+  ghcr.io/nlamirault/distroless/infra-tools:latest | jq -r .payload | base64 -d | jq .predicate
 ```
 
 - **Shell image**
@@ -128,5 +128,5 @@ cosign download attestation \
 cosign download attestation \
   --platform=linux/amd64 \
   --predicate-type=https://spdx.dev/Document \
-  ghcr.io/gitguardian/wolfi/infra-tools:latest-shell | jq -r .payload | base64 -d | jq .predicate
+  ghcr.io/nlamirault/distroless/infra-tools:latest-shell | jq -r .payload | base64 -d | jq .predicate
 ```
