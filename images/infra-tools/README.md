@@ -73,7 +73,7 @@ cosign verify-attestation \
   ghcr.io/nlamirault/distroless/infra-tools:latest-dev@sha256:e6c26b534f457aad355c223bab8171af2a80ba3f354b58b8b2bfaefd29965394
 ```
 
-## 📦 Verify the Image Signature
+## ✅ Verify the Image Signature
 
 All official images are **cryptographically signed** using
 [Sigstore Cosign](https://www.sigstore.dev/).
@@ -108,7 +108,7 @@ cosign verify \
   ghcr.io/nlamirault/distroless/infra-tools:latest-dev | jq
 ```
 
-## 📦 Verify the Image Attestations
+## ✅ Verify the Image Attestations
 
 To enhance transparency, we generate SBOMs for each release. SBOMs are available
 directly from the container registry and can be verified using using
