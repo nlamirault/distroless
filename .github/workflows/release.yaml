@@ -117,14 +117,20 @@ jobs:
       shell: bash
       run: |
         echo "digest=$(crane digest ${{ steps.vars.outputs.image }})" >> $GITHUB_OUTPUT
+        crane digest ${{ steps.vars.outputs.image }}
+
         if [[ "${{ inputs.archs }}" == *"amd64"* ]]; then
             echo "digest-amd64=$(crane digest --platform=linux/amd64 ${{ steps.vars.outputs.image }})" >> $GITHUB_OUTPUT
+            crane digest --platform=linux/amd64 ${{ steps.vars.outputs.image }}
         else
+            echo "AMD64 unavailable"
             echo "digest-amd64=''" >> $GITHUB_OUTPUT
         fi
         if [[ "${{ inputs.archs }}" == *"arm64"* ]]; then
             echo "digest-arm64=$(crane digest --platform=linux/arm64 ${{ steps.vars.outputs.image }})" >> $GITHUB_OUTPUT
+            crane digest --platform=linux/arm64 ${{ steps.vars.outputs.image }}
         else
+            echo "ARM64 unavailable"
             echo "digest-arm64=''" >> $GITHUB_OUTPUT
         fi
 
