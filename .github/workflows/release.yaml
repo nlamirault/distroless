@@ -103,6 +103,18 @@ jobs:
       run: |
         mkdir -p ${{ github.workspace }}/sbom
 
+    - if: ${{ hashFiles("${{ inputs.config-dir }}/melange.yaml") != '' }}
+      name: Run Melange
+      uses: chainguard-dev/actions/melange-build@v1.0.0
+      with:
+        workdir: ${{ inputs.config-dir }}
+        config: melange.yaml
+        archs: ${{ env.ARCHS }}
+        signing-key-path: /work/melange.rsa
+        repository-path: /work/packages
+        empty-workspace: false
+        sign-with-temporary-key: true
+
     - name: Publish image
       id: apko
       uses: chainguard-images/actions/apko-publish@v1.0.0
