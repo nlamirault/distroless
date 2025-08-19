@@ -1,0 +1,62 @@
+# SPDX-FileCopyrightText: Copyright (C) Nicolas Lamirault <nicolas.lamirault@gmail.com>
+# SPDX-License-Identifier: Apache-2.0
+
+---
+package:
+  name: jq
+  version: 0.6.0
+  epoch: 2
+  description: Json Builder
+  copyright:
+  - license: Apache-2.0
+  target-architecture:
+  - aarch64
+  - amd64
+
+environment:
+  contents:
+    keyring:
+    - https://packages.wolfi.dev/os/wolfi-signing.rsa.pub
+    repositories:
+    - https://packages.wolfi.dev/os
+    packages:
+    - ca-certificates-bundle
+    - busybox
+    - curl
+    # - build-base
+    # - wolfi-base
+    # - wolfi-baselayout
+
+vars:
+  jb-version: "v0.6.0"
+
+pipeline:
+- name: Install binary
+  runs: |
+    set -x
+
+    JB_VERSION=v0.6.0
+
+    ARCH=$(uname -m)
+    case $ARCH in
+      "x86_64") ARCH="amd64" ;;
+      "aarch64") ARCH="arm64" ;;
+    esac
+
+    EXEC_DIR="${{targets.destdir}}/usr/bin"
+    mkdir -p "${EXEC_DIR}"
+
+    curl -sL "https://github.com/jsonnet-bundler/jsonnet-bundler/releases/download/${{vars.jb-version}}/jb-linux-amd64" -o "${EXEC_DIR}/jb"
+    chmod +x "${EXEC_DIR}/jb"
+
+update:
+  enabled: true
+  github:
+    identifier: jsonnet-bundler/jsonnet-bundler
+    strip-prefix: v
+
+test:
+  pipeline:
+  - runs: |
+      jb --version
+      jb --help
