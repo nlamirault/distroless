@@ -1,0 +1,36 @@
+# SPDX-FileCopyrightText: Copyright (C) Nicolas Lamirault <nicolas.lamirault@gmail.com>
+# SPDX-License-Identifier: Apache-2.0
+
+---
+include: images/apko.yaml
+
+contents:
+  packages:
+  - aws-cli-v2
+  - bash
+  - busybox
+  - ca-certificates-bundle
+  - cosign
+  - crane
+  - curl
+  - docker-cli
+  - docker-cli-buildx
+  - gettext
+  - git
+  - grype
+  - helm
+  - helm-docs
+  - jq
+  - kubectl
+  - kustomize
+  - openssh-client
+  - openssl
+  - opentofu
+  - yq
+
+cmd: /usr/bin/sh -l
+
+annotations:
+  org.opencontainers.image.title: "infra-tools"
+  org.opencontainers.image.description: "infra-tools image based on Wolfi OS"
+  org.opencontainers.image.source: "https://github.com/nlamirault/distroless/tree/main/images/infra-tools"
