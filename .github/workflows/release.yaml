@@ -75,7 +75,8 @@ jobs:
         shell: bash
         run: |
           if [[ "${{ github.ref_name }}" != "main" ]]; then
-            export REGISTRY="ttl.sh"
+            # export REGISTRY="ttl.sh"
+            export REGISTRY=${{ env.REGISTRY }}
           else
             export REGISTRY=${{ env.REGISTRY }}
           fi
