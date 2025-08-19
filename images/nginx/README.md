@@ -38,7 +38,7 @@ gh attestation verify \
 
 ```shell
 gh attestation verify \
-  --owner gitguardian \
+  --owner nlamirault \
   oci://ghcr.io/nlamirault/distroless/nginx:latest-shell
 ```
 
@@ -46,7 +46,7 @@ gh attestation verify \
 
 ```shell
 gh attestation verify \
-  --owner gitguardian \
+  --owner nlamirault \
   oci://ghcr.io/nlamirault/distroless/nginx:latest-dev
 ```
 
