@@ -1,0 +1,11 @@
+---
+include: images/nginx/shell.yaml
+
+contents:
+  packages:
+    - apk-tools
+    - git
+    - wolfi-keys
+
+accounts:
+  run-as: root
