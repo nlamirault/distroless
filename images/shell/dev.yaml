@@ -1,0 +1,21 @@
+# SPDX-FileCopyrightText: Copyright (C) Nicolas Lamirault <nicolas.lamirault@gmail.com>
+# SPDX-License-Identifier: Apache-2.0
+
+---
+include: images/shell/prod.yaml
+
+contents:
+  packages:
+  - apk-tools
+  - build-base
+  - git
+  - vim
+  - wget
+  - wolfi-keys
+  - socat
+  - nftables
+  - ethtool
+  - ctop
+  - bind-tools
+accounts:
+  run-as: root
