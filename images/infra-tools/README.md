@@ -45,17 +45,17 @@ gh attestation verify \
 
 - **Production image**
 
-`````shell
+```shell
 cosign verify-attestation \
-  --type slsaprovenance \
-  --certificate-oidc-issuer https://token.actions.githubusercontent.com \
-  --certificate-identity-regexp '^https://github.com/slsa-framework/slsa-github-generator/.github/workflows/generator_container_slsa3.yml@refs/tags/v[0-9]+.[0-9]+.[0-9]+$' \
-  ghcr.io/nlamirault/distroless/infra-tools:latest@sha256:ce146eca0f43355cc4f4cc1004e66743a64d979034cee9fd657f2966358ce7bd
+ --type slsaprovenance \
+ --certificate-oidc-issuer https://token.actions.githubusercontent.com \
+ --certificate-identity-regexp '^https://github.com/slsa-framework/slsa-github-generator/.github/workflows/generator_container_slsa3.yml@refs/tags/v[0-9]+.[0-9]+.[0-9]+$' \
+ ghcr.io/nlamirault/distroless/infra-tools:latest@sha256:ce146eca0f43355cc4f4cc1004e66743a64d979034cee9fd657f2966358ce7bd
 ```
 
 - **Shell image**
 
-````shell
+```shell
 cosign verify-attestation \
   --type slsaprovenance \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com \
@@ -88,7 +88,7 @@ cosign verify \
   --certificate-oidc-issuer=https://token.actions.githubusercontent.com \
   --certificate-identity=https://github.com/nlamirault/distroless/.github/workflows/release.yaml@refs/heads/main \
   ghcr.io/nlamirault/distroless/infra-tools:latest | jq
-`````
+````
 
 - **Shell image**
 
