@@ -62,6 +62,10 @@ labels:
   description: "Categorizes issue or PR as a support question"
   color: "cc317c"
 
+- name: "kind/security"
+  description: "Categorizes issue or PR as related to a security process"
+  color: "fbca04"
+
 ## PRIORITY
 
 - name: "priority/critical"

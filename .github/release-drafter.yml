@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 ---
-# name-template: 'v$RESOLVED_VERSION'
+name-template: "v$RESOLVED_VERSION"
 tag-template: "v$RESOLVED_VERSION"
 # https://gitmoji.carloscuesta.me/
 categories:
@@ -18,6 +18,9 @@ categories:
   - "fix"
   - "bugfix"
   - "bug"
+- title: "🔒 Security"
+  labels:
+  - "kind/security"
 - title: "📝 Documentation"
   labels:
   - "kind/documentation"
