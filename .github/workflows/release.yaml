@@ -54,6 +54,7 @@ jobs:
       security-events: write
 
     runs-on: ubuntu-latest
+
     outputs:
       digest: ${{ steps.digest.outputs.digest }}
       registry: ${{ steps.vars.outputs.registry }}
@@ -75,11 +76,17 @@ jobs:
         run: |
           if [[ "${{ github.ref_name }}" != "main" ]]; then
             export REGISTRY="ttl.sh"
+          else
+            export REGISTRY=${{ env.REGISTRY }}
           fi
           echo "registry=${REGISTRY}" >> $GITHUB_OUTPUT
           echo "image=${REGISTRY}/${{ inputs.repository }}:${{ inputs.tag }}" >> $GITHUB_OUTPUT
+          # Debug
+          echo "registry=${REGISTRY}"
+          echo "image=${REGISTRY}/${{ inputs.repository }}:${{ inputs.tag }}"
 
-      - name: Login to GitHub Registry
+      - if: steps.vars.outputs.registry == 'ghcr.io'
+        name: Login to GitHub Registry
         uses: docker/login-action@74a5d142397b4f367a81961eba4e8cd7edddf772 # v3.4.0
         with:
           registry: ghcr.io
