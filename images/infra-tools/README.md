@@ -15,6 +15,12 @@ GitHub CLI ([gh](https://cli.github.com/)) can be used to retrieve the build
 provenance, which details the exact commit, workflow, and runner that produced
 the image:
 
+| 📌 Version | 💻 Command                                                                                      |
+| ---------- | ----------------------------------------------------------------------------------------------- |
+| Production | gh attestation verify --owner nlamirault oci://ghcr.io/nlamirault/distroless/infra-tools:latest |
+| Shell      | gh attestation verify --owner nlamirault oci://ghcr.io/nlamirault/distroless/infra-shell:latest |
+| Dev        | gh attestation verify --owner nlamirault oci://ghcr.io/nlamirault/distroless/infra-dev:latest   |
+
 - **Production image**
 
 ```shell
@@ -29,6 +35,14 @@ gh attestation verify \
 gh attestation verify \
   --owner nlamirault \
   oci://ghcr.io/nlamirault/distroless/infra-tools:latest-shell
+```
+
+- **Dev image**
+
+```shell
+gh attestation verify \
+  --owner nlamirault \
+  oci://ghcr.io/nlamirault/distroless/infra-tools:latest-dev
 ```
 
 ## 📦 **Image Verification**
@@ -57,6 +71,15 @@ cosign verify \
   --certificate-oidc-issuer=https://token.actions.githubusercontent.com \
   --certificate-identity=https://github.com/nlamirault/distroless/.github/workflows/release.yaml@refs/heads/main \
   ghcr.io/nlamirault/distroless/infra-tools:latest-shell | jq
+```
+
+- **Dev image**
+
+```shell
+cosign verify \
+  --certificate-oidc-issuer=https://token.actions.githubusercontent.com \
+  --certificate-identity=https://github.com/nlamirault/distroless/.github/workflows/release.yaml@refs/heads/main \
+  ghcr.io/nlamirault/distroless/infra-tools:latest-dev | jq
 ```
 
 ### 📦 **Image SBOMs**
