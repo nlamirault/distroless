@@ -8,7 +8,7 @@ on:
         description: 'Image repository'
         type: string
         required: false
-        default: duyhenryer/wolfi-images/${{ github.workflow }}
+        default: nlamirault/distroless/${{ github.workflow }}
       tag:
         description: 'Image tag'
         type: string
@@ -55,11 +55,16 @@ jobs:
       digest: ${{ steps.digest.outputs.digest }}
       registry: ${{ steps.vars.outputs.registry }}
       image: ${{ steps.vars.outputs.image }}
+
     steps:
-      - uses: imjasonh/setup-crane@v0.4
-      - uses: sigstore/cosign-installer@v3
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Setup Crane
+        uses: imjasonh/setup-crane@31b88efe9de28ae0ffa220711af4b60be9435f6e # v0.4
+
+      - name: Install cosign
+        uses: sigstore/cosign-installer@398d4b0eeef1380460a10c8013a76f728fb906ac # v3.9.1
 
       - name: Set Vars
         id: vars
@@ -74,7 +79,7 @@ jobs:
 
       - if: steps.vars.outputs.registry == 'ghcr.io'
         name: Login to GitHub Registry
-        uses: docker/login-action@v3
+        uses: docker/login-action@74a5d142397b4f367a81961eba4e8cd7edddf772 # v3.4.0
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -158,7 +163,7 @@ jobs:
 
       - if: steps.vars.outputs.registry == 'ghcr.io'
         name: Attest build provenance
-        uses: actions/attest-build-provenance@v2
+        uses: actions/attest-build-provenance@e8998f949152b193b063cb0ec769d69d929409be # v2.4.0
         with:
           subject-name: ${{ steps.vars.outputs.registry }}/${{ inputs.repository }}
           subject-digest: ${{ steps.digest.outputs.digest }}
