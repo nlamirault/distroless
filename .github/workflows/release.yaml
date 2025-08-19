@@ -8,7 +8,7 @@ on:
         description: 'Image repository'
         type: string
         required: false
-        default: nlamirault/distroless/${{ github.workflow }}
+        # default: nlamirault/distroless/${{ github.workflow }}
       tag:
         description: 'Image tag'
         type: string
