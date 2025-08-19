@@ -1,24 +1,27 @@
+# SPDX-FileCopyrightText: Copyright (C) Nicolas Lamirault <nicolas.lamirault@gmail.com>
+# SPDX-License-Identifier: Apache-2.0
+
 ---
 include: images/apko.yaml
 
 contents:
   packages:
-    - bash
-    - busybox
-    - ca-certificates-bundle
-    - curl
-    - dockerize
-    - gettext
-    - glibc-locale-posix
-    - jq
-    - netcat-openbsd
-    - wolfi-baselayout
-    - yq
+  - bash
+  - busybox
+  - ca-certificates-bundle
+  - curl
+  - dockerize
+  - gettext
+  - glibc-locale-posix
+  - jq
+  - netcat-openbsd
+  - wolfi-baselayout
+  - yq
 
 entrypoint:
   command: /usr/bin/bash -c
 
 annotations:
-  org.opencontainers.image.title: 'shell'
-  org.opencontainers.image.description: 'Shell image based on Wolfi OS'
-  org.opencontainers.image.source": 'https://github.com/nlamirault/distroless/tree/main/images/shell'
+  org.opencontainers.image.title: "shell"
+  org.opencontainers.image.description: "Shell image based on Wolfi OS"
+  org.opencontainers.image.source": "https://github.com/nlamirault/distroless/tree/main/images/shell"

@@ -1,19 +1,22 @@
+# SPDX-FileCopyrightText: Copyright (C) Nicolas Lamirault <nicolas.lamirault@gmail.com>
+# SPDX-License-Identifier: Apache-2.0
+
 ---
 name: OCI / Nginx
 
 on:
   schedule:
-    - cron: "00 01 * * 1-5"
+  - cron: "00 01 * * 1-5"
   pull_request:
     paths:
-      - .github/workflows/nginx.yaml
-      - 'images/nginx/*.yaml'
+    - .github/workflows/nginx.yaml
+    - "images/nginx/*.yaml"
   push:
     branches:
-      - 'main'
+    - "main"
     paths:
-      - .github/workflows/nginx.yaml
-      - 'images/nginx/*.yaml'
+    - .github/workflows/nginx.yaml
+    - "images/nginx/*.yaml"
   workflow_dispatch:
 
 concurrency:
@@ -35,12 +38,12 @@ jobs:
         version: [latest] # , "1.27"]
         variant: [prod, shell, dev]
         include:
-          - version: latest
-            packages: ''
-          # - version: "1.27"
-          #   packages: 'nginx~1.27,nginx-package-config~1.27,nginx-mod-stream~1.27'
+        - version: latest
+          packages: ""
+        # - version: "1.27"
+        #   packages: 'nginx~1.27,nginx-package-config~1.27,nginx-mod-stream~1.27'
     name: ${{ matrix.version }}${{ matrix.variant == 'shell' && '-shell' || matrix.variant == 'dev' && '-dev' || '' }}
-    uses: './.github/workflows/release.yaml'
+    uses: "./.github/workflows/release.yaml"
     with:
       repository: nlamirault/distroless/nginx
       config-dir: images/nginx

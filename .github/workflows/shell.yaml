@@ -1,14 +1,17 @@
+# SPDX-FileCopyrightText: Copyright (C) Nicolas Lamirault <nicolas.lamirault@gmail.com>
+# SPDX-License-Identifier: Apache-2.0
+
 ---
 name: OCI / Shell
 
 on:
   schedule:
-    - cron: "00 01 * * 1"
+  - cron: "00 01 * * 1"
   push:
     branches:
-      - 'main'
+    - "main"
     paths:
-      - 'images/shell/*.yaml'
+    - "images/shell/*.yaml"
   workflow_dispatch:
 
 permissions:
@@ -26,10 +29,10 @@ jobs:
         version: [latest]
         variant: [prod, dev]
         include:
-          - version: latest
-            packages: ''
+        - version: latest
+          packages: ""
     name: ${{ matrix.version }}${{ matrix.variant == 'dev' && '-dev' || '' }}
-    uses: './.github/workflows/release.yaml'
+    uses: "./.github/workflows/release.yaml"
     with:
       repository: nlamirault/distroless/shell
       config-dir: images/shell
