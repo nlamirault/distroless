@@ -7,7 +7,7 @@
 repository:
   # See https://docs.github.com/en/rest/reference/repos#update-a-repository for all available settings.
   name: distroless
-  description: Lightweight and secure** container images
+  description: Lightweight and secure container images
   homepage: https://github.com/nlamirault/distroless
   topics: distroless, wolfi, apk, melange
   private: false
