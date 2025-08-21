@@ -1,0 +1,5 @@
+# See:
+# https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/about-code-owners
+# https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/about-code-owners#codeowners-syntax
+
+* @nlamirault
