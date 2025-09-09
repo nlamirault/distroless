@@ -6,7 +6,7 @@ package:
   name: jsonnet-bundler
   version: 0.6.0
   epoch: 1
-  description: A jsonnet package manager
+  description: A package manager for Jsonnet
   copyright:
   - license: Apache-2.0
   target-architecture:
