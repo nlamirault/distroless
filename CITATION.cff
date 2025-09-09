@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+title: "Lightweight and secure container images"
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+abstract: >-
+  A set of **lightweight and secure** container images based on the
+  [Wolfi](https://wolfi.dev/) Linux distribution.
+authors:
+  - given-names: Nicolas
+    family-names: Lamirault
+    email: nicolas.lamirault@gmail.com
+identifiers:
+  - type: url
+    value: 'https://github.com/nlamirault/distroless'
+    description: URL to the GitHub repository for ai-rules
+repository-code: 'https://github.com/nlamirault/distroless'
+url: 'https://github.com/nlamirault/distroless'
+license: Apache-2.0

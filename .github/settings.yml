@@ -7,7 +7,7 @@
 repository:
   # See https://docs.github.com/en/rest/reference/repos#update-a-repository for all available settings.
   name: distroless
-  description: Lightweight and secure** container images
+  description: Lightweight and secure container images
   homepage: https://github.com/nlamirault/distroless
   topics: distroless, wolfi, apk, melange
   private: false
@@ -61,6 +61,10 @@ labels:
 - name: "kind/support"
   description: "Categorizes issue or PR as a support question"
   color: "cc317c"
+
+- name: "kind/security"
+  description: "Categorizes issue or PR as related to a security process"
+  color: "fbca04"
 
 ## PRIORITY
 
