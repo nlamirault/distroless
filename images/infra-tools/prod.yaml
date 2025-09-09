@@ -5,6 +5,14 @@
 include: images/apko.yaml
 
 contents:
+  keyring:
+  - https://packages.wolfi.dev/os/wolfi-signing.rsa.pub
+  - /work/keys/melange.rsa.pub
+  repositories:
+  - https://packages.wolfi.dev/os
+  - "@local /work/packages"
+  # repositories:
+  # - packages
   packages:
   - aws-cli-v2
   - bash
@@ -27,6 +35,8 @@ contents:
   - openssl
   - opentofu
   - yq
+  # Local
+  - jsonnet-bundler@local
 
 cmd: /usr/bin/sh -l
 
