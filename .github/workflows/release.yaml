@@ -103,7 +103,7 @@ jobs:
       run: |
         mkdir -p ${{ github.workspace }}/sbom
 
-    - if: ${{ hashFiles("${{ inputs.config-dir }}/melange.yaml") != '' }}
+    - if: hashFiles("${{ inputs.config-dir }}/melange.yaml") != ''
       name: Run Melange
       uses: chainguard-dev/actions/melange-build@main
       with:
