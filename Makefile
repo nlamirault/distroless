@@ -32,16 +32,6 @@ check: check-docker ## Check requirements
 
 ##@ Chainguard
 
-# .PHONY: build-apk
-# build-apk: guard-IMAGE ## Build the APK using Docker images (only if melange.yaml exists)
-# 	@echo -e "$(OK_COLOR)[$(APP)] Build APK packages: $(ARCH)$(NO_COLOR)"
-# 	@if [ -f "$(IMAGE)/melange.yaml" ]; then \
-# 		test -f ${PWD}/keys/melange.rsa || docker run --privileged --rm -it --privileged -v "${PWD}:/work" -w /work/$(IMAGE) cgr.dev/chainguard/melange:latest keygen; \
-# 		docker run --privileged --rm -v "${PWD}:/work" -w /work/$(IMAGE) cgr.dev/chainguard/melange:latest build melange.yaml --arch "$(ARCH)" --signing-key ../../melange.rsa; \
-# 	else \
-# 		echo -e "$(INFO_COLOR)[$(APP)] No melange.yaml found in $(IMAGE), skipping APK build$(NO_COLOR)"; \
-# 	fi
-
 .PHONY: build-apk
 build-apk: guard-IMAGE ## Build the APK using Docker images (only if melange.yaml exists)
 	@echo -e "$(OK_COLOR)[$(APP)] Build APK packages: $(ARCH)$(NO_COLOR)"
@@ -96,30 +86,6 @@ build-all: guard-IMAGE ## Build APK packages and all container images
 	$(MAKE) build-shell-image IMAGE=$(IMAGE)
 
 # ====================================
-# I M A G E S
-# ====================================
-
-##@ Images
-
-.PHONY: infra-tools
-infra-tools: ## Build infra-tools image
-	$(MAKE) build-all IMAGE=images/infra-tools
-
-.PHONY: shell
-shell: ## Build shell image
-	$(MAKE) build-all IMAGE=images/shell
-
-.PHONY: nginx
-nginx: ## Build nginx image
-	$(MAKE) build-all IMAGE=images/nginx
-
-.PHONY: all-images
-all-images: ## Build all images
-	$(MAKE) infra-tools
-	$(MAKE) shell
-	$(MAKE) nginx
-
-# ====================================
 # T E S T I N G
 # ====================================
 
@@ -135,10 +101,6 @@ test: guard-IMAGE ## Test container image
 	else \
 		echo -e "$(ERROR_COLOR)Image tar file not found. Run 'make build-image IMAGE=$(IMAGE)' first$(NO_COLOR)"; \
 	fi
-
-.PHONY: test-infra-tools
-test-infra-tools: ## Test infra-tools image
-	$(MAKE) test IMAGE=images/infra-tools
 
 # ====================================
 # S E C U R I T Y
@@ -168,35 +130,3 @@ sbom: guard-IMAGE ## Generate SBOM for container image
 	else \
 		echo -e "$(ERROR_COLOR)Image tar file not found. Run 'make build-image IMAGE=$(IMAGE)' first$(NO_COLOR)"; \
 	fi
-
-# ====================================
-# F O R M A T T I N G
-# ====================================
-
-##@ Formatting
-
-.PHONY: fmt
-fmt: ## Format code
-	@echo -e "$(OK_COLOR)[$(APP)] Format code$(NO_COLOR)"
-	dprint fmt
-
-.PHONY: lint
-lint: ## Lint code
-	@echo -e "$(OK_COLOR)[$(APP)] Lint code$(NO_COLOR)"
-	dprint check
-
-# ====================================
-# G I T   H O O K S
-# ====================================
-
-##@ Git Hooks
-
-.PHONY: pre-commit
-pre-commit: ## Run pre-commit hooks
-	@echo -e "$(OK_COLOR)[$(APP)] Run pre-commit hooks$(NO_COLOR)"
-	pre-commit run --all-files
-
-.PHONY: install-hooks
-install-hooks: ## Install pre-commit hooks
-	@echo -e "$(OK_COLOR)[$(APP)] Install pre-commit hooks$(NO_COLOR)"
-	pre-commit install
