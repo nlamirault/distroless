@@ -1,0 +1,5 @@
+*.tar
+*.spdx.json
+packages/**/*.apk
+**/packages
+keys/melange.rsa*

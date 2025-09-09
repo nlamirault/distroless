@@ -1,6 +1,24 @@
 # infra-tools
 
-This image contains all infra tools.
+This image contains infrastructure tools for cloud-native development and
+operations.
+
+## Included Tools
+
+- **AWS CLI v2** - Amazon Web Services command line interface
+- **Cosign** - Container signing and verification
+- **Crane** - Container registry manipulation
+- **Docker CLI** with Buildx - Container building and management
+- **Git** - Version control system
+- **Grype** - Vulnerability scanner
+- **Helm** with Helm Docs - Kubernetes package manager
+- **jq/yq** - JSON/YAML processors
+- **jsonnet-bundler (jb)** - Jsonnet package manager
+- **kubectl** - Kubernetes command line tool
+- **Kustomize** - Kubernetes configuration management
+- **OpenTofu** - Infrastructure as Code tool
+- **OpenSSH Client** - Secure shell client
+- **OpenSSL** - Cryptography toolkit
 
 ## Versions
 
