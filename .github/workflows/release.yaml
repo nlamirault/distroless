@@ -103,6 +103,23 @@ jobs:
       run: |
         mkdir -p ${{ github.workspace }}/sbom
 
+    - name: Check Melange file existence
+      id: check_melange_file
+      uses: thebinaryfelix/check-file-existence-action@v1
+      with:
+        files: ${{ inputs.config-dir }}/melange.yaml
+
+    - if: steps.check_melange_file.outputs.exists == 'true'
+      name: Run Melange
+      uses: chainguard-dev/actions/melange-build@main
+      with:
+        config: ${{ inputs.config-dir }}/melange.yaml
+        archs: ${{ env.ARCHS }}
+        signing-key-path: /work/keys/melange.rsa
+        repository-path: /work/packages
+        empty-workspace: false
+        sign-with-temporary-key: true
+
     - name: Publish image
       id: apko
       uses: distroless/actions/apko-publish@v1.0.0
