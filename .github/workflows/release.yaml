@@ -103,13 +103,7 @@ jobs:
       run: |
         mkdir -p ${{ github.workspace }}/sbom
 
-    - name: Check Melange file existence
-      id: check_melange_file
-      uses: thebinaryfelix/check-file-existence-action@v1
-      with:
-        files: ${{ inputs.config-dir }}/melange.yaml
-
-    - if: steps.check_melange_file.outputs.exists == 'true'
+    - if: ${{ hashFiles("${{ inputs.config-dir }}/melange.yaml") != '' }}
       name: Run Melange
       uses: chainguard-dev/actions/melange-build@main
       with:
