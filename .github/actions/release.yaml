@@ -109,8 +109,8 @@ jobs:
       with:
         config: ${{ inputs.config-dir }}/melange.yaml
         archs: ${{ env.ARCHS }}
-        signing-key-path: /work/keys/melange.rsa
-        repository-path: /work/packages
+        signing-key-path: ${{ github.workspace }}/keys/melange.rsa
+        repository-path: ${{ github.workspace }}/packages
         empty-workspace: false
         sign-with-temporary-key: true
 

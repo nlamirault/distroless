@@ -32,7 +32,7 @@ jobs:
         - version: latest
           packages: ""
     name: ${{ matrix.version }}${{ matrix.variant == 'dev' && '-dev' || '' }}
-    uses: "./.github/workflows/release.yaml"
+    uses: "./.github/actions/release.yaml"
     with:
       repository: nlamirault/distroless/shell
       config-dir: images/shell

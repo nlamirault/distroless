@@ -36,7 +36,7 @@ jobs:
         version: [latest]
         variant: [prod, shell, dev]
     name: ${{ matrix.version }}${{ matrix.variant == 'shell' && '-shell' || matrix.variant == 'dev' && '-dev' || '' }}
-    uses: "./.github/workflows/release.yaml"
+    uses: "./.github/actions/release.yaml"
     with:
       repository: nlamirault/distroless/infra-tools
       config-dir: images/infra-tools
