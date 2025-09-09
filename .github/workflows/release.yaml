@@ -105,7 +105,7 @@ jobs:
 
     - if: hashFiles("${{ inputs.config-dir }}/melange.yaml") != ''
       name: Run Melange
-      uses: chainguard-dev/actions/melange-build@v1.0.0
+      uses: chainguard-dev/actions/melange-build@f632aec66edeebe245ad686a33a0c0a2160cac31 # v1.4.14
       with:
         config: ${{ inputs.config-dir }}/melange.yaml
         archs: ${{ env.ARCHS }}
@@ -116,7 +116,7 @@ jobs:
 
     - name: Publish image
       id: apko
-      uses: distroless/actions/apko-publish@v1.0.0
+      uses: distroless/actions/apko-publish@f632aec66edeebe245ad686a33a0c0a2160cac31 # v1.4.14
       with:
         config: ${{ inputs.config-dir }}/${{ inputs.target }}.yaml
         tag: ${{ steps.vars.outputs.image }}
