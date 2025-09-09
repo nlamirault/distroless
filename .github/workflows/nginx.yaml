@@ -43,7 +43,7 @@ jobs:
         # - version: "1.27"
         #   packages: 'nginx~1.27,nginx-package-config~1.27,nginx-mod-stream~1.27'
     name: ${{ matrix.version }}${{ matrix.variant == 'shell' && '-shell' || matrix.variant == 'dev' && '-dev' || '' }}
-    uses: "./.github/actions/release.yaml"
+    uses: "./.github/workflows/release.yaml"
     with:
       repository: nlamirault/distroless/nginx
       config-dir: images/nginx
