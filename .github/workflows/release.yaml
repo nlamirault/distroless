@@ -227,7 +227,7 @@ jobs:
 
     - name: Scan image
       id: scan
-      uses: anchore/scan-action@v6
+      uses: anchore/scan-action@v7
       with:
         image: ${{ needs.publish.outputs.image }}
         cache-db: true
