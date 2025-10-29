@@ -105,7 +105,7 @@ jobs:
 
     - if: hashFiles("${{ inputs.config-dir }}/melange.yaml") != ''
       name: Run Melange
-      uses: chainguard-dev/actions/melange-build@f632aec66edeebe245ad686a33a0c0a2160cac31 # v1.4.14
+      uses: chainguard-dev/actions/melange-build@1b32103f5aa389c31ab0be75a8edc38d7e4750d8 # v1.5.7
       with:
         config: ${{ inputs.config-dir }}/melange.yaml
         archs: ${{ env.ARCHS }}
