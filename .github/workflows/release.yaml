@@ -103,7 +103,17 @@ jobs:
       run: |
         mkdir -p ${{ github.workspace }}/sbom
 
-    - if: hashFiles("${{ inputs.config-dir }}/melange.yaml") != ''
+    - name: Check for melange.yaml
+      id: check-melange
+      shell: bash
+      run: |
+        if [ -f "${{ inputs.config-dir }}/melange.yaml" ]; then
+          echo "exists=true" >> $GITHUB_OUTPUT
+        else
+          echo "exists=false" >> $GITHUB_OUTPUT
+        fi
+
+    - if: steps.check-melange.outputs.exists == 'true'
       name: Run Melange
       uses: chainguard-dev/actions/melange-build@f632aec66edeebe245ad686a33a0c0a2160cac31 # v1.4.14
       with:
