@@ -116,7 +116,7 @@ jobs:
 
     - name: Publish image
       id: apko
-      uses: distroless/actions/apko-publish@f632aec66edeebe245ad686a33a0c0a2160cac31 # v1.4.14
+      uses: chainguard-images/actions/apko-publish@f632aec66edeebe245ad686a33a0c0a2160cac31 # v1.4.14
       with:
         config: ${{ inputs.config-dir }}/${{ inputs.target }}.yaml
         tag: ${{ steps.vars.outputs.image }}
