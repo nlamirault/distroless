@@ -116,7 +116,7 @@ jobs:
 
     - name: Publish image
       id: apko
-      uses: chainguard-images/actions/apko-publish@f632aec66edeebe245ad686a33a0c0a2160cac31 # v1.4.14
+      uses: chainguard-images/actions/apko-publish@9fc710c7faed46f22e51e4e0e057c8ac0caa0fb3 # v1.0.7
       with:
         config: ${{ inputs.config-dir }}/${{ inputs.target }}.yaml
         tag: ${{ steps.vars.outputs.image }}
