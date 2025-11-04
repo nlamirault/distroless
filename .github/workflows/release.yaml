@@ -233,20 +233,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v5
+      uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
     - name: Scan image
       id: scan
-      uses: anchore/scan-action@v7
+      uses: anchore/scan-action@568b89d27fc18c60e56937bff480c91c772cd993 # v7.1.0
       with:
         image: ${{ needs.publish.outputs.image }}
         cache-db: true
         fail-build: "false"
         severity-cutoff: "high"
-        #grype-version: v0.87.0
+        output-format: "sarif"
 
     - name: Upload SARIF
-      uses: github/codeql-action/upload-sarif@v4
+      uses: github/codeql-action/upload-sarif@4e94bd11f71e507f7f87df81788dff88d1dacbfb # v4.31.0
       with:
         sarif_file: ${{ steps.scan.outputs.sarif }}
         category: ${{ github.workflow }}
