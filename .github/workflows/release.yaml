@@ -118,7 +118,7 @@ jobs:
       uses: chainguard-dev/actions/melange-build@1b32103f5aa389c31ab0be75a8edc38d7e4750d8 # v1.5.7
       with:
         config: ${{ inputs.config-dir }}/melange.yaml
-        archs: ${{ inouts.archs }}
+        archs: ${{ inputs.archs }}
         signing-key-path: ${{ github.workspace }}/keys/melange.rsa
         repository-path: ${{ github.workspace }}/packages
         empty-workspace: false
