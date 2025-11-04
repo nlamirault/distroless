@@ -33,13 +33,17 @@ jobs:
   publish:
     strategy:
       matrix:
-        version: [latest]
+        version: [latest] # , "1.27"]
         variant: [prod, shell, dev]
+        include:
+        - version: latest
+          packages: ""
     name: ${{ matrix.version }}${{ matrix.variant == 'shell' && '-shell' || matrix.variant == 'dev' && '-dev' || '' }}
     uses: "./.github/workflows/release.yaml"
     with:
       repository: nlamirault/distroless/infra-tools
-      config-dir: images/infra-tools
+      config-dir: images/nginx
       tag: ${{ matrix.version }}${{ matrix.variant == 'shell' && '-shell' || matrix.variant == 'dev' && '-dev' || '' }}
       target: ${{ matrix.variant }}
+      packages: ${{ matrix.packages }}
     secrets: inherit
