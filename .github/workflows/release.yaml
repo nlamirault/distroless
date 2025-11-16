@@ -122,8 +122,8 @@ jobs:
         signing-key-path: ${{ github.workspace }}/keys/melange.rsa
         repository-path: ${{ github.workspace }}/packages
         empty-workspace: false
-        sign-with-temporary-key: true
-        # sign-with-key: true
+        # sign-with-temporary-key: true
+        sign-with-key: true
 
     - name: Publish image
       id: apko
