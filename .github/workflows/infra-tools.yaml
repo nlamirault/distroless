@@ -42,7 +42,7 @@ jobs:
     uses: "./.github/workflows/release.yaml"
     with:
       repository: nlamirault/distroless/infra-tools
-      config-dir: images/nginx
+      config-dir: images/infra-tools
       tag: ${{ matrix.version }}${{ matrix.variant == 'shell' && '-shell' || matrix.variant == 'dev' && '-dev' || '' }}
       target: ${{ matrix.variant }}
       packages: ${{ matrix.packages }}
