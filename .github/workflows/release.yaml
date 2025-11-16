@@ -129,6 +129,7 @@ jobs:
       uses: chainguard-images/actions/apko-publish@9fc710c7faed46f22e51e4e0e057c8ac0caa0fb3 # v1.0.7
       with:
         config: ${{ inputs.config-dir }}/${{ inputs.target }}.yaml
+        keyring-append: /github/workspace/melange.rsa.pub
         tag: ${{ steps.vars.outputs.image }}
         package-append: ${{ inputs.packages }}
         archs: ${{ inputs.archs }}
