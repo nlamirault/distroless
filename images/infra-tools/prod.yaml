@@ -10,7 +10,7 @@ contents:
   # - /work/keys/melange.rsa.pub
   repositories:
   - https://packages.wolfi.dev/os
-  - "@local /work/packages"
+  - "@local /github/workspace/packages"
   # repositories:
   # - packages
   packages:
