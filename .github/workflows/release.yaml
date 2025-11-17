@@ -27,11 +27,6 @@ on: # yamllint disable-line rule:truthy
         type: string
         required: false
         default: "prod"
-      packages:
-        description: "Additional packages"
-        type: string
-        required: false
-        default: ""
       archs:
         description: "Architectures"
         type: string
@@ -130,8 +125,8 @@ jobs:
       with:
         config: ${{ inputs.config-dir }}/${{ inputs.target }}.yaml
         keyring-append: ${{ github.workspace }}/keys/melange.rsa.pub
+        build-repository-append: ${{ github.workspace }}/packages
         tag: ${{ steps.vars.outputs.image }}
-        package-append: ${{ inputs.packages }}
         archs: ${{ inputs.archs }}
         sbom-path: ${{ github.workspace }}/sbom
 

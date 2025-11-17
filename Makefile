@@ -50,7 +50,7 @@ build-image: guard-IMAGE ## Build container image with apko
 	fi
 	$(eval IMAGE_NAME := $(shell basename $(IMAGE)))
 	# docker run --rm -v "${PWD}:/work" -w /work busybox:latest ls /work/melange.rsa.pub
-	docker run --rm -v "${PWD}:/work" -w /work cgr.dev/chainguard/apko:latest build $(IMAGE)/prod.yaml $(IMAGE_NAME):latest $(IMAGE)/$(IMAGE_NAME).tar --arch $(ARCH) --keyring-append /work/keys/melange.rsa.pub
+	docker run --rm -v "${PWD}:/work" -w /work cgr.dev/chainguard/apko:latest build $(IMAGE)/prod.yaml $(IMAGE_NAME):latest $(IMAGE)/$(IMAGE_NAME).tar --arch $(ARCH) --keyring-append /work/keys/melange.rsa.pub --build-repository-append /work/packages --package-append jsonnet-bundler@local
 
 .PHONY: build-dev-image
 build-dev-image: guard-IMAGE ## Build development container image with apko
@@ -60,7 +60,7 @@ build-dev-image: guard-IMAGE ## Build development container image with apko
 	fi
 	$(eval IMAGE_NAME := $(shell basename $(IMAGE)))
 	@if [ -f "$(IMAGE)/dev.yaml" ]; then \
-		docker run --rm -v "${PWD}:/work" -w /work cgr.dev/chainguard/apko:latest build $(IMAGE)/dev.yaml $(IMAGE_NAME):dev $(IMAGE)/$(IMAGE_NAME)-dev.tar --arch $(ARCH) --keyring-append /work/keys/melange.rsa.pub; \
+		docker run --rm -v "${PWD}:/work" -w /work cgr.dev/chainguard/apko:latest build $(IMAGE)/dev.yaml $(IMAGE_NAME):dev $(IMAGE)/$(IMAGE_NAME)-dev.tar --arch $(ARCH) --keyring-append /work/keys/melange.rsa.pub --build-repository-append /work/packages --package-append jsonnet-bundler@local; \
 	else \
 		echo -e "$(INFO_COLOR)[$(APP)] No dev.yaml found in $(IMAGE), skipping dev image build$(NO_COLOR)"; \
 	fi
@@ -73,7 +73,7 @@ build-shell-image: guard-IMAGE ## Build shell container image with apko
 	fi
 	$(eval IMAGE_NAME := $(shell basename $(IMAGE)))
 	@if [ -f "$(IMAGE)/shell.yaml" ]; then \
-		docker run --rm -v "${PWD}:/work" -w /work cgr.dev/chainguard/apko:latest build $(IMAGE)/shell.yaml $(IMAGE_NAME):shell $(IMAGE)/$(IMAGE_NAME)-shell.tar --arch $(ARCH) --keyring-append /work/keys/melange.rsa.pub; \
+		docker run --rm -v "${PWD}:/work" -w /work cgr.dev/chainguard/apko:latest build $(IMAGE)/shell.yaml $(IMAGE_NAME):shell $(IMAGE)/$(IMAGE_NAME)-shell.tar --arch $(ARCH) --keyring-append /work/keys/melange.rsa.pub --build-repository-append /work/packages --package-append jsonnet-bundler@local; \
 	else \
 		echo -e "$(INFO_COLOR)[$(APP)] No shell.yaml found in $(IMAGE), skipping shell image build$(NO_COLOR)"; \
 	fi

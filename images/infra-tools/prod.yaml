@@ -10,9 +10,6 @@ contents:
   # - /work/keys/melange.rsa.pub
   repositories:
   - https://packages.wolfi.dev/os
-  - "@local packages"
-  # repositories:
-  # - packages
   packages:
   - aws-cli-v2
   - bash
@@ -35,8 +32,6 @@ contents:
   - openssl
   - opentofu
   - yq
-  # Local
-  - jsonnet-bundler@local
 
 cmd: /usr/bin/sh -l
 

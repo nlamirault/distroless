@@ -28,9 +28,6 @@ jobs:
       matrix:
         version: [latest]
         variant: [prod, dev]
-        include:
-        - version: latest
-          packages: ""
     name: ${{ matrix.version }}${{ matrix.variant == 'dev' && '-dev' || '' }}
     uses: "./.github/workflows/release.yaml"
     with:
