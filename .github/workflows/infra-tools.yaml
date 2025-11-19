@@ -42,5 +42,4 @@ jobs:
       config-dir: images/infra-tools
       tag: ${{ matrix.version }}${{ matrix.variant == 'shell' && '-shell' || matrix.variant == 'dev' && '-dev' || '' }}
       target: ${{ matrix.variant }}
-      packages: ${{ matrix.packages }}
     secrets: inherit
