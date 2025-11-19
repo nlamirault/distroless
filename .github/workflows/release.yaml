@@ -119,13 +119,24 @@ jobs:
         empty-workspace: false
         sign-with-temporary-key: true
 
-    - name: Publish image
+    - if: steps.check-melange.outputs.exists == 'true'
+      name: Apko and Melange
       id: apko
       uses: chainguard-images/actions/apko-publish@9fc710c7faed46f22e51e4e0e057c8ac0caa0fb3 # v1.0.7
       with:
         config: ${{ inputs.config-dir }}/${{ inputs.target }}.yaml
         keyring-append: ${{ github.workspace }}/keys/melange.rsa.pub
         build-repository-append: ${{ github.workspace }}/packages
+        tag: ${{ steps.vars.outputs.image }}
+        archs: ${{ inputs.archs }}
+        sbom-path: ${{ github.workspace }}/sbom
+
+    - if: steps.check-melange.outputs.exists == 'false'
+      name: Apko
+      id: apko
+      uses: chainguard-images/actions/apko-publish@9fc710c7faed46f22e51e4e0e057c8ac0caa0fb3 # v1.0.7
+      with:
+        config: ${{ inputs.config-dir }}/${{ inputs.target }}.yaml
         tag: ${{ steps.vars.outputs.image }}
         archs: ${{ inputs.archs }}
         sbom-path: ${{ github.workspace }}/sbom
