@@ -59,16 +59,16 @@ jobs:
       image: ${{ steps.vars.outputs.image }}
 
     steps:
-    - name: Checkout
+    - name: 🚚 Checkout
       uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
 
-    - name: Setup Crane
+    - name: 🎉 Setup Crane
       uses: imjasonh/setup-crane@31b88efe9de28ae0ffa220711af4b60be9435f6e # v0.4
 
-    - name: Install cosign
+    - name: 🎉 Install cosign
       uses: sigstore/cosign-installer@faadad0cce49287aee09b3a48701e75088a2c6ad # v4.0.0
 
-    - name: Set Vars
+    - name: 💡 Set Vars
       id: vars
       shell: bash
       run: |
@@ -85,20 +85,20 @@ jobs:
         echo "image=${REGISTRY}/${{ inputs.repository }}:${{ inputs.tag }}"
 
     - if: steps.vars.outputs.registry == 'ghcr.io'
-      name: Login to GitHub Registry
+      name: 🔓 Login to GitHub Registry
       uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3.6.0
       with:
         registry: ghcr.io
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Create SBOM directory
+    - name: 🔧 Create SBOM directory
       id: output
       shell: bash
       run: |
         mkdir -p ${{ github.workspace }}/sbom
 
-    - name: Check for melange.yaml
+    - name: 🔧 Check for melange.yaml
       id: check-melange
       shell: bash
       run: |
@@ -109,7 +109,7 @@ jobs:
         fi
 
     - if: steps.check-melange.outputs.exists == 'true'
-      name: Run Melange
+      name: ✅ Melange
       uses: chainguard-dev/actions/melange-build@b479012116eacde7f895586c17b598f7ba0ee700 # v1.5.9
       with:
         config: ${{ inputs.config-dir }}/melange.yaml
@@ -120,7 +120,7 @@ jobs:
         sign-with-temporary-key: true
 
     - if: steps.check-melange.outputs.exists == 'true'
-      name: Apko and Melange
+      name: ✅ Apko and Melange
       id: apko-melange
       uses: chainguard-images/actions/apko-publish@9fc710c7faed46f22e51e4e0e057c8ac0caa0fb3 # v1.0.7
       with:
@@ -132,7 +132,7 @@ jobs:
         sbom-path: ${{ github.workspace }}/sbom
 
     - if: steps.check-melange.outputs.exists == 'false'
-      name: Apko
+      name: ✅ Apko
       id: apko
       uses: chainguard-images/actions/apko-publish@9fc710c7faed46f22e51e4e0e057c8ac0caa0fb3 # v1.0.7
       with:
@@ -141,7 +141,8 @@ jobs:
         archs: ${{ inputs.archs }}
         sbom-path: ${{ github.workspace }}/sbom
 
-    - id: digest
+    - name: 🔧 Extract digest
+      id: digest
       shell: bash
       run: |
         echo "digest=$(crane digest ${{ steps.vars.outputs.image }})" >> $GITHUB_OUTPUT
@@ -162,7 +163,7 @@ jobs:
             echo "digest-arm64=''" >> $GITHUB_OUTPUT
         fi
 
-    - name: Sign image
+    - name: 🔓 Sign image
       shell: bash
       env:
         COSIGN_YES: "true"
@@ -170,9 +171,10 @@ jobs:
         cosign sign \
           --recursive \
           --oidc-provider=github-actions \
+          --oidc-issuer=https://token.actions.githubusercontent.com \
           ${{ steps.vars.outputs.registry }}/${{ inputs.repository }}@${{ steps.digest.outputs.digest }}
 
-    - name: Attest index SBOM
+    - name: 🔓 Attest index SBOM
       shell: bash
       env:
         COSIGN_YES: "true"
@@ -184,7 +186,7 @@ jobs:
           ${{ steps.vars.outputs.registry }}/${{ inputs.repository }}@${{ steps.digest.outputs.digest }}
 
     - if: steps.digest.outputs.digest-amd64 != ''
-      name: Attest amd64 SBOM
+      name: 🔓 Attest amd64 SBOM
       shell: bash
       env:
         COSIGN_YES: "true"
@@ -196,7 +198,7 @@ jobs:
           ${{ steps.vars.outputs.registry }}/${{ inputs.repository }}@${{ steps.digest.outputs.digest-amd64 }}
 
     - if: steps.digest.outputs.digest-arm64 != ''
-      name: Attest arm64 SBOM
+      name: 🔓 Attest arm64 SBOM
       shell: bash
       env:
         COSIGN_YES: "true"
@@ -208,7 +210,7 @@ jobs:
           ${{ steps.vars.outputs.registry }}/${{ inputs.repository }}@${{ steps.digest.outputs.digest-arm64 }}
 
     - if: steps.vars.outputs.registry == 'ghcr.io'
-      name: Attest build provenance
+      name: 🔓 Attest build provenance
       uses: actions/attest-build-provenance@977bb373ede98d70efdf65b84cb5f73e068dcc2a # v3.0.0
       with:
         subject-name: ${{ steps.vars.outputs.registry }}/${{ inputs.repository }}
@@ -239,10 +241,10 @@ jobs:
     needs: publish
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
+    - name: 🚚 Checkout
       uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
 
-    - name: Scan image
+    - name: ✅ Scan image
       id: scan
       uses: anchore/scan-action@3aaf50d765cfcceafa51d322ccb790e40f6cd8c5 # v7.2.0
       with:
@@ -252,7 +254,7 @@ jobs:
         severity-cutoff: "high"
         output-format: "sarif"
 
-    - name: Upload SARIF
+    - name: ⬆️ Upload SARIF
       uses: github/codeql-action/upload-sarif@e12f0178983d466f2f6028f5cc7a6d786fd97f4b # v4.31.4
       with:
         sarif_file: ${{ steps.scan.outputs.sarif }}
