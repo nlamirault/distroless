@@ -172,7 +172,7 @@ jobs:
           --recursive \
           --oidc-provider=github-actions \
           --oidc-issuer=https://token.actions.githubusercontent.com \
-          ${{ steps.vars.outputs.registry }}/${{ inputs.repository }}@${{ steps.digest.outputs.digest }}
+          ${{ steps.vars.outputs.image }}
 
     - name: 🔓 Attest index SBOM
       shell: bash
