@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: Copyright (C) Nicolas Lamirault <nicolas.lamirault@gmail.com>
+# SPDX-License-Identifier: Apache-2.0
+
+---
+name: OCI / Shell
+
+on: # yamllint disable-line rule:truthy
+  release:
+    types:
+    - published
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+  attestations: write
+  id-token: write
+  security-events: write
+  actions: read
+
+jobs:
+  publish:
+    strategy:
+      matrix:
+        variant: [prod, dev]
+    name: ${{ matrix.version }}${{ matrix.variant == 'dev' && '-dev' || '' }}
+    uses: "./.github/workflows/release.yaml"
+    with:
+      repository: nlamirault/distroless/shell
+      config-dir: images/shell
+      tag: ${{ github.ref_name }}${{ matrix.variant == 'dev' && '-dev' || '' }}
+      target: ${{ matrix.variant }}
+    secrets: inherit

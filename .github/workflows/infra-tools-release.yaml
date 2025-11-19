@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: Copyright (C) Nicolas Lamirault <nicolas.lamirault@gmail.com>
+# SPDX-License-Identifier: Apache-2.0
+
+---
+name: OCI / Infra tools
+
+on: # yamllint disable-line rule:truthy
+  release:
+    types:
+    - published
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+  attestations: write
+  id-token: write
+  security-events: write
+  actions: read
+
+jobs:
+  publish:
+    strategy:
+      matrix:
+        variant: [prod, shell, dev]
+    name: ${{ matrix.version }}${{ matrix.variant == 'shell' && '-shell' || matrix.variant == 'dev' && '-dev' || '' }}
+    uses: "./.github/workflows/release.yaml"
+    with:
+      repository: nlamirault/distroless/infra-tools
+      config-dir: images/infra-tools
+      tag: ${{ github.ref_name }}${{ matrix.variant == 'shell' && '-shell' || matrix.variant == 'dev' && '-dev' || '' }}
+      target: ${{ matrix.variant }}
+    secrets: inherit
