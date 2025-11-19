@@ -7,9 +7,8 @@ A set of **lightweight and secure** container images based on the
 
 | Image Name                           | Pull                                                    |
 | ------------------------------------ | ------------------------------------------------------- |
-| [infra-tools](./images/infra-tools/) | `docker pull ghcr.io/nlamirault/distroless/infra-tools` |
 | [shell](./images/shell/)             | `docker pull ghcr.io/nlamirault/distroless/shell`       |
-| [nginx](./images/nginx/)             | `docker pull ghcr.io/nlamirault/distroless/nginx`       |
+| [infra-tools](./images/infra-tools/) | `docker pull ghcr.io/nlamirault/distroless/infra-tools` |
 
 ## Contributing
 
