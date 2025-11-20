@@ -2,23 +2,12 @@
 # SPDX-License-Identifier: Apache-2.0
 
 ---
-name: OCI / Shell snapshot
+name: OCI / Shell release
 
 on: # yamllint disable-line rule:truthy
-  schedule:
-  - cron: "00 01 * * 1"
-  pull_request:
-    paths:
-    - .github/workflows/shell.yaml
-    - "images/shell/*.yaml"
-    - "images/shell/**/*.yaml"
-  push:
-    branches:
-    - "main"
-    paths:
-    - .github/workflows/shell.yaml
-    - "images/shell/*.yaml"
-    - "images/shell/**/*.yaml"
+  release:
+    types:
+    - published
   workflow_dispatch:
 
 permissions:
@@ -33,13 +22,12 @@ jobs:
   publish:
     strategy:
       matrix:
-        version: [latest]
         variant: [prod, dev]
     name: ${{ matrix.version }}${{ matrix.variant == 'dev' && '-dev' || '' }}
     uses: "./.github/workflows/release.yaml"
     with:
       repository: nlamirault/distroless/shell
       config-dir: images/shell
-      tag: ${{ matrix.version }}${{ matrix.variant == 'dev' && '-dev' || '' }}
+      tag: ${{ github.ref_name }}${{ matrix.variant == 'dev' && '-dev' || '' }}
       target: ${{ matrix.variant }}
     secrets: inherit

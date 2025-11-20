@@ -2,23 +2,12 @@
 # SPDX-License-Identifier: Apache-2.0
 
 ---
-name: OCI / Infra tools snapshot
+name: OCI / Infra tools release
 
 on: # yamllint disable-line rule:truthy
-  schedule:
-  - cron: "00 01 * * 1"
-  pull_request:
-    paths:
-    - .github/workflows/infra-tools.yaml
-    - "images/infra-tools/*.yaml"
-    - "images/infra-tools/**/*.yaml"
-  push:
-    branches:
-    - "main"
-    paths:
-    - .github/workflows/infra-tools.yaml
-    - "images/infra-tools/*.yaml"
-    - "images/infra-tools/**/*.yaml"
+  release:
+    types:
+    - published
   workflow_dispatch:
 
 permissions:
@@ -33,13 +22,12 @@ jobs:
   publish:
     strategy:
       matrix:
-        version: [latest]
         variant: [prod, shell, dev]
     name: ${{ matrix.version }}${{ matrix.variant == 'shell' && '-shell' || matrix.variant == 'dev' && '-dev' || '' }}
     uses: "./.github/workflows/release.yaml"
     with:
       repository: nlamirault/distroless/infra-tools
       config-dir: images/infra-tools
-      tag: ${{ matrix.version }}${{ matrix.variant == 'shell' && '-shell' || matrix.variant == 'dev' && '-dev' || '' }}
+      tag: ${{ github.ref_name }}${{ matrix.variant == 'shell' && '-shell' || matrix.variant == 'dev' && '-dev' || '' }}
       target: ${{ matrix.variant }}
     secrets: inherit
