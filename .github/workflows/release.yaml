@@ -67,8 +67,8 @@ jobs:
 
     - name: 🎉 Install cosign
       uses: sigstore/cosign-installer@faadad0cce49287aee09b3a48701e75088a2c6ad # v4.0.0
-      with:
-        cosign-release: 2.6.1
+    # with:
+    #   cosign-release: 2.6.1
 
     - name: 💡 Set Vars
       id: vars
@@ -172,6 +172,7 @@ jobs:
       run: |
         cosign sign \
           --recursive \
+          --use-signing-config=false \
           --oidc-provider=github-actions \
           --oidc-issuer=https://token.actions.githubusercontent.com \
           ${{ steps.vars.outputs.image }}
@@ -183,6 +184,7 @@ jobs:
       run: |
         cosign attest \
           --type=spdxjson \
+          --use-signing-config=false \
           --predicate=${{ github.workspace }}/sbom/sbom-index.spdx.json \
           --oidc-provider=github-actions \
           ${{ steps.vars.outputs.registry }}/${{ inputs.repository }}@${{ steps.digest.outputs.digest }}
@@ -195,6 +197,7 @@ jobs:
       run: |
         cosign attest \
           --type=spdxjson \
+          --use-signing-config=false \
           --predicate=${{ github.workspace }}/sbom/sbom-x86_64.spdx.json \
           --oidc-provider=github-actions \
           ${{ steps.vars.outputs.registry }}/${{ inputs.repository }}@${{ steps.digest.outputs.digest-amd64 }}
@@ -207,6 +210,7 @@ jobs:
       run: |
         cosign attest \
           --type=spdxjson \
+          --use-signing-config=false \
           --predicate=${{ github.workspace }}/sbom/sbom-aarch64.spdx.json \
           --oidc-provider=github-actions \
           ${{ steps.vars.outputs.registry }}/${{ inputs.repository }}@${{ steps.digest.outputs.digest-arm64 }}
