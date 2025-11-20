@@ -2,16 +2,23 @@
 # SPDX-License-Identifier: Apache-2.0
 
 ---
-name: OCI / Shell
+name: OCI / Shell snapshot
 
 on: # yamllint disable-line rule:truthy
   schedule:
   - cron: "00 01 * * 1"
+  pull_request:
+    paths:
+    - .github/workflows/shell.yaml
+    - "images/shell/*.yaml"
+    - "images/shell/**/*.yaml"
   push:
     branches:
     - "main"
     paths:
+    - .github/workflows/shell.yaml
     - "images/shell/*.yaml"
+    - "images/shell/**/*.yaml"
   workflow_dispatch:
 
 permissions:

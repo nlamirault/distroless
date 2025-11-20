@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 ---
-name: OCI / Infra tools
+name: OCI / Infra tools release
 
 on: # yamllint disable-line rule:truthy
   release:
