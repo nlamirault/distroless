@@ -124,7 +124,7 @@ jobs:
     - if: steps.check-melange.outputs.exists == 'true'
       name: ✅ Apko and Melange
       id: apko-melange
-      uses: chainguard-images/actions/apko-publish@9fc710c7faed46f22e51e4e0e057c8ac0caa0fb3 # v1.0.7
+      uses: chainguard-images/actions/apko-publish@e5595253fa40415ea0c8ac3ff791b52eacbfd393 # v1.0.10
       with:
         config: ${{ inputs.config-dir }}/${{ inputs.target }}.yaml
         keyring-append: ${{ github.workspace }}/keys/melange.rsa.pub
@@ -136,7 +136,7 @@ jobs:
     - if: steps.check-melange.outputs.exists == 'false'
       name: ✅ Apko
       id: apko
-      uses: chainguard-images/actions/apko-publish@9fc710c7faed46f22e51e4e0e057c8ac0caa0fb3 # v1.0.7
+      uses: chainguard-images/actions/apko-publish@e5595253fa40415ea0c8ac3ff791b52eacbfd393 # v1.0.10
       with:
         config: ${{ inputs.config-dir }}/${{ inputs.target }}.yaml
         tag: ${{ steps.vars.outputs.image }}
