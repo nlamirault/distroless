@@ -60,7 +60,7 @@ jobs:
 
     steps:
     - name: 🚚 Checkout
-      uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+      uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
 
     - name: 🎉 Setup Crane
       uses: imjasonh/setup-crane@31b88efe9de28ae0ffa220711af4b60be9435f6e # v0.4
@@ -248,7 +248,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: 🚚 Checkout
-      uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+      uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
 
     - name: ✅ Scan image
       id: scan
