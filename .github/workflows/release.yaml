@@ -252,7 +252,7 @@ jobs:
 
     - name: ✅ Scan image
       id: scan
-      uses: anchore/scan-action@3aaf50d765cfcceafa51d322ccb790e40f6cd8c5 # v7.2.0
+      uses: anchore/scan-action@3c9a191a0fbab285ca6b8530b5de5a642cba332f # v7.2.2
       with:
         image: ${{ needs.publish.outputs.image }}
         cache-db: true
