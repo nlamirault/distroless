@@ -1,4 +1,4 @@
-# Distroless
+# Atoma
 
 A set of **lightweight and secure** container images based on the
 [Wolfi](https://wolfi.dev/) Linux distribution.
@@ -7,8 +7,8 @@ A set of **lightweight and secure** container images based on the
 
 | Image Name                           | Pull                                                    |
 | ------------------------------------ | ------------------------------------------------------- |
-| [shell](./images/shell/)             | `docker pull ghcr.io/nlamirault/distroless/shell`       |
-| [infra-tools](./images/infra-tools/) | `docker pull ghcr.io/nlamirault/distroless/infra-tools` |
+| [shell](./images/shell/)             | `docker pull ghcr.io/nlamirault/atoma/shell`       |
+| [infra-tools](./images/infra-tools/) | `docker pull ghcr.io/nlamirault/atoma/infra-tools` |
 
 ## Contributing
 

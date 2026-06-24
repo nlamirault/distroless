@@ -6,8 +6,8 @@ Container image with Bash and tooling including `curl`, `netcat`, `jq`, `yq`.
 
 | 📌 Version | ⬇️ Pull URL                                     |
 | ---------- | ---------------------------------------------- |
-| latest     | ghcr.io/nlamirault/distroless/shell:latest     |
-| latest-dev | ghcr.io/nlamirault/distroless/shell:latest-dev |
+| latest     | ghcr.io/nlamirault/atoma/shell:latest     |
+| latest-dev | ghcr.io/nlamirault/atoma/shell:latest-dev |
 
 ## ✅ Verify the Provenance
 
@@ -20,7 +20,7 @@ the image:
 ```shell
 gh attestation verify \
   --owner nlamirault \
-  oci://ghcr.io/nlamirault/distroless/shell:latest
+  oci://ghcr.io/nlamirault/atoma/shell:latest
 ```
 
 - **Shell image**
@@ -28,5 +28,5 @@ gh attestation verify \
 ```shell
 gh attestation verify \
   --owner nlamirault \
-  oci://ghcr.io/nlamirault/distroless/shell:latest-shell
+  oci://ghcr.io/nlamirault/atoma/shell:latest-shell
 ```

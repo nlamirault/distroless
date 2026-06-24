@@ -24,9 +24,9 @@ operations.
 
 | 📌 Version   | ⬇️ Pull URL                                             |
 | ------------ | ------------------------------------------------------ |
-| latest       | ghcr.io/nlamirault/distroless/infra-tools:latest       |
-| latest-shell | ghcr.io/nlamirault/distroless/infra-tools:latest-shell |
-| latest-dev   | ghcr.io/nlamirault/distroless/infra-tools:latest-dev   |
+| latest       | ghcr.io/nlamirault/atoma/infra-tools:latest       |
+| latest-shell | ghcr.io/nlamirault/atoma/infra-tools:latest-shell |
+| latest-dev   | ghcr.io/nlamirault/atoma/infra-tools:latest-dev   |
 
 ## ✅ Verify the Build Provenance
 
@@ -41,7 +41,7 @@ the image:
 ```shell
 gh attestation verify \
   --owner nlamirault \
-  oci://ghcr.io/nlamirault/distroless/infra-tools:latest
+  oci://ghcr.io/nlamirault/atoma/infra-tools:latest
 ```
 
 - **Shell image**
@@ -49,7 +49,7 @@ gh attestation verify \
 ```shell
 gh attestation verify \
   --owner nlamirault \
-  oci://ghcr.io/nlamirault/distroless/infra-tools:latest-shell
+  oci://ghcr.io/nlamirault/atoma/infra-tools:latest-shell
 ```
 
 - **Dev image**
@@ -57,7 +57,7 @@ gh attestation verify \
 ```shell
 gh attestation verify \
   --owner nlamirault \
-  oci://ghcr.io/nlamirault/distroless/infra-tools:latest-dev
+  oci://ghcr.io/nlamirault/atoma/infra-tools:latest-dev
 ```
 
 ### Using Cosign
@@ -69,7 +69,7 @@ cosign verify-attestation \
  --type slsaprovenance \
  --certificate-oidc-issuer https://token.actions.githubusercontent.com \
  --certificate-identity-regexp '^https://github.com/slsa-framework/slsa-github-generator/.github/workflows/generator_container_slsa3.yml@refs/tags/v[0-9]+.[0-9]+.[0-9]+$' \
- ghcr.io/nlamirault/distroless/infra-tools:latest@sha256:xxxxxx
+ ghcr.io/nlamirault/atoma/infra-tools:latest@sha256:xxxxxx
 ```
 
 - **Shell image**
@@ -79,7 +79,7 @@ cosign verify-attestation \
   --type slsaprovenance \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com \
   --certificate-identity-regexp '^https://github.com/slsa-framework/slsa-github-generator/.github/workflows/generator_container_slsa3.yml@refs/tags/v[0-9]+.[0-9]+.[0-9]+$' \
-  ghcr.io/nlamirault/distroless/infra-tools:latest-shell@sha256:xxxxx
+  ghcr.io/nlamirault/atoma/infra-tools:latest-shell@sha256:xxxxx
 ```
 
 - **Dev image**
@@ -89,7 +89,7 @@ cosign verify-attestation \
   --type slsaprovenance \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com \
   --certificate-identity-regexp '^https://github.com/slsa-framework/slsa-github-generator/.github/workflows/generator_container_slsa3.yml@refs/tags/v[0-9]+.[0-9]+.[0-9]+$' \
-  ghcr.io/nlamirault/distroless/infra-tools:latest-dev@sha256:xxxxxx
+  ghcr.io/nlamirault/atoma/infra-tools:latest-dev@sha256:xxxxxx
 ```
 
 ## ✅ Verify the Image Signature
@@ -105,8 +105,8 @@ following command:
 ```shell
 cosign verify \
   --certificate-oidc-issuer=https://token.actions.githubusercontent.com \
-  --certificate-identity=https://github.com/nlamirault/distroless/.github/workflows/infra-tools.yaml@refs/heads/main \
-  ghcr.io/nlamirault/distroless/infra-tools:latest | jq
+  --certificate-identity=https://github.com/nlamirault/atoma/.github/workflows/infra-tools.yaml@refs/heads/main \
+  ghcr.io/nlamirault/atoma/infra-tools:latest | jq
 ```
 
 - **Shell image**
@@ -114,8 +114,8 @@ cosign verify \
 ```shell
 cosign verify \
   --certificate-oidc-issuer=https://token.actions.githubusercontent.com \
-  --certificate-identity=https://github.com/nlamirault/distroless/.github/workflows/release.yaml@refs/heads/main \
-  ghcr.io/nlamirault/distroless/infra-tools:latest-shell | jq
+  --certificate-identity=https://github.com/nlamirault/atoma/.github/workflows/release.yaml@refs/heads/main \
+  ghcr.io/nlamirault/atoma/infra-tools:latest-shell | jq
 ```
 
 - **Dev image**
@@ -123,8 +123,8 @@ cosign verify \
 ```shell
 cosign verify \
   --certificate-oidc-issuer=https://token.actions.githubusercontent.com \
-  --certificate-identity=https://github.com/nlamirault/distroless/.github/workflows/release.yaml@refs/heads/main \
-  ghcr.io/nlamirault/distroless/infra-tools:latest-dev | jq
+  --certificate-identity=https://github.com/nlamirault/atoma/.github/workflows/release.yaml@refs/heads/main \
+  ghcr.io/nlamirault/atoma/infra-tools:latest-dev | jq
 ```
 
 ## ✅ Verify the Image Attestations
@@ -139,8 +139,8 @@ directly from the container registry and can be verified using using
 cosign verify-attestation \
   --type=https://spdx.dev/Document \
   --certificate-oidc-issuer=https://token.actions.githubusercontent.com \
-  --certificate-identity=https://github.com/nlamirault/distroless/.github/workflows/release.yaml@refs/heads/main \
-  ghcr.io/nlamirault/distroless/infra-tools:latest
+  --certificate-identity=https://github.com/nlamirault/atoma/.github/workflows/release.yaml@refs/heads/main \
+  ghcr.io/nlamirault/atoma/infra-tools:latest
 ```
 
 - **Shell image**
@@ -149,8 +149,8 @@ cosign verify-attestation \
 cosign verify-attestation \
   --type=https://spdx.dev/Document \
   --certificate-oidc-issuer=https://token.actions.githubusercontent.com \
-  --certificate-identity=https://github.com/nlamirault/distroless/.github/workflows/release.yaml@refs/heads/main \
-  ghcr.io/nlamirault/distroless/infra-tools:latest-shell
+  --certificate-identity=https://github.com/nlamirault/atoma/.github/workflows/release.yaml@refs/heads/main \
+  ghcr.io/nlamirault/atoma/infra-tools:latest-shell
 ```
 
 This will pull in the signature for the attestation specified by the --type
@@ -169,7 +169,7 @@ following command will obtain the SBOM for the python image on `linux/amd64`:
 cosign download attestation \
   --platform=linux/amd64 \
   --predicate-type=https://spdx.dev/Document \
-  ghcr.io/nlamirault/distroless/infra-tools:latest | jq -r .payload | base64 -d | jq .predicate
+  ghcr.io/nlamirault/atoma/infra-tools:latest | jq -r .payload | base64 -d | jq .predicate
 ```
 
 - **Shell image**
@@ -178,5 +178,5 @@ cosign download attestation \
 cosign download attestation \
   --platform=linux/amd64 \
   --predicate-type=https://spdx.dev/Document \
-  ghcr.io/nlamirault/distroless/infra-tools:latest-shell | jq -r .payload | base64 -d | jq .predicate
+  ghcr.io/nlamirault/atoma/infra-tools:latest-shell | jq -r .payload | base64 -d | jq .predicate
 ```

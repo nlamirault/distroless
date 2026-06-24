@@ -6,10 +6,10 @@
 ---
 repository:
   # See https://docs.github.com/en/rest/reference/repos#update-a-repository for all available settings.
-  name: distroless
+  name: atoma
   description: Lightweight and secure container images
-  homepage: https://github.com/nlamirault/distroless
-  topics: distroless, wolfi, apk, melange
+  homepage: https://github.com/nlamirault/atoma
+  topics: atoma, wolfi, apk, melange
   private: false
   has_issues: true
   has_projects: true

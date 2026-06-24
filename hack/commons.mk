@@ -1,9 +1,9 @@
 # SPDX-FileCopyrightText: Copyright (C) Nicolas Lamirault <nicolas.lamirault@gmail.com>
 # SPDX-License-Identifier: Apache-2.0
 
-APP = distroless
+APP = atoma
 
-BANNER = D I S T R O L E S S
+BANNER = A T O M A
 
 CONFIG_HOME = $(or ${XDG_CONFIG_HOME},${XDG_CONFIG_HOME},${HOME}/.config)
 

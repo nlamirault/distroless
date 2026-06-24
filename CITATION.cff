@@ -13,8 +13,8 @@ authors:
     email: nicolas.lamirault@gmail.com
 identifiers:
   - type: url
-    value: 'https://github.com/nlamirault/distroless'
+    value: 'https://github.com/nlamirault/atoma'
     description: URL to the GitHub repository for ai-rules
-repository-code: 'https://github.com/nlamirault/distroless'
-url: 'https://github.com/nlamirault/distroless'
+repository-code: 'https://github.com/nlamirault/atoma'
+url: 'https://github.com/nlamirault/atoma'
 license: Apache-2.0

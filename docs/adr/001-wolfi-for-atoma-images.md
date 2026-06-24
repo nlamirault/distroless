@@ -8,7 +8,7 @@ informed: Development team
 spdx-license: Apache-2.0
 ---
 
-# ADR-001: Distroless Container Images
+# ADR-001: Atoma Container Images
 
 ## Context
 

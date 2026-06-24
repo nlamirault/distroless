@@ -11,7 +11,7 @@ on: # yamllint disable-line rule:truthy
         description: "Image repository"
         type: string
         required: false
-        # default: nlamirault/distroless/${{ github.workflow }}
+        # default: nlamirault/atoma/${{ github.workflow }}
       tag:
         description: "Image tag"
         type: string

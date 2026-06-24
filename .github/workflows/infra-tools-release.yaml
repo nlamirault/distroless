@@ -26,7 +26,7 @@ jobs:
     name: ${{ matrix.version }}${{ matrix.variant == 'shell' && '-shell' || matrix.variant == 'dev' && '-dev' || '' }}
     uses: "./.github/workflows/release.yaml"
     with:
-      repository: nlamirault/distroless/infra-tools
+      repository: nlamirault/atoma/infra-tools
       config-dir: images/infra-tools
       tag: ${{ github.ref_name }}${{ matrix.variant == 'shell' && '-shell' || matrix.variant == 'dev' && '-dev' || '' }}
       target: ${{ matrix.variant }}
