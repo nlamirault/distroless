@@ -38,7 +38,7 @@ jobs:
     name: ${{ matrix.version }}${{ matrix.variant == 'dev' && '-dev' || '' }}
     uses: "./.github/workflows/release.yaml"
     with:
-      repository: nlamirault/distroless/shell
+      repository: nlamirault/atoma/shell
       config-dir: images/shell
       tag: ${{ matrix.version }}${{ matrix.variant == 'dev' && '-dev' || '' }}
       target: ${{ matrix.variant }}

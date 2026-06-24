@@ -21,7 +21,7 @@ clean: ## Cleanup
 	@find . -name "melange.rsa*" | xargs rm -f
 	@find . -name "packages" | xargs rm -fr
 	@rm -f sbom-*.cdx sbom-*.json
-	@rm -f portefaix-distroless.tar
+	@rm -f portefaix-atoma.tar
 
 .PHONY: check
 check: check-docker ## Check requirements
