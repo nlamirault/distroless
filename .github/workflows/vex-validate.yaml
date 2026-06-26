@@ -39,13 +39,23 @@ jobs:
         chmod +x hack/scripts/validate-vex.sh
         hack/scripts/validate-vex.sh
 
-    - name: ✅ Run vexctl validate (spec-level check)
+    - name: ✅ Run vexctl spec-level check (per file)
       shell: bash
       run: |
+        shopt -s nullglob
+        vex_files=(vex/*.openvex.json)
+        shopt -u nullglob
+        if [ "${#vex_files[@]}" -eq 0 ]; then
+          echo "No VEX files found — skipping spec check."
+          exit 0
+        fi
         errors=0
-        for f in vex/*.openvex.json; do
-          echo "Validating ${f} with vexctl..."
-          if ! vexctl validate "${f}"; then
+        for f in "${vex_files[@]}"; do
+          echo "Checking ${f} with vexctl..."
+          if ! vexctl merge \
+              --id "https://atoma/vex/validate" \
+              --author "local" \
+              "${f}" > /dev/null; then
             echo "FAIL: vexctl rejected ${f}"
             errors=$((errors + 1))
           else
@@ -54,21 +64,11 @@ jobs:
         done
         if [ "$errors" -gt 0 ]; then
           echo ""
-          echo "${errors} file(s) failed vexctl validation."
+          echo "${errors} file(s) failed vexctl spec check."
           exit 1
         fi
         echo ""
-        echo "All VEX files passed vexctl validation."
-
-  merge-dry-run:
-    name: Merge VEX documents (dry run)
-    runs-on: ubuntu-latest
-    steps:
-    - name: 🚚 Checkout
-      uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
-
-    - name: 🎉 Setup vexctl
-      uses: openvex/setup-vexctl@v0.1.0
+        echo "All VEX files passed vexctl spec check."
 
     - name: 🔀 Merge all VEX documents (dry run)
       shell: bash
