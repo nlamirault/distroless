@@ -42,4 +42,5 @@ jobs:
       config-dir: images/infra-tools
       tag: ${{ matrix.version }}${{ matrix.variant == 'shell' && '-shell' || matrix.variant == 'dev' && '-dev' || '' }}
       target: ${{ matrix.variant }}
+      vex-file: vex/infra-tools.openvex.json
     secrets: inherit

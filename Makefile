@@ -131,7 +131,7 @@ sbom: guard-IMAGE ## Generate SBOM for container image
 		echo -e "$(ERROR_COLOR)Image tar file not found. Run 'make build-image IMAGE=$(IMAGE)' first$(NO_COLOR)"; \
 	fi
 
-.PHONY: validate-vex
-validate-vex: ## Validate all VEX documents
+.PHONY: vex
+vex: ## Validate all VEX documents
 	@echo -e "$(OK_COLOR)[$(APP)] Validate VEX documents$(NO_COLOR)"
 	@bash hack/scripts/validate-vex.sh

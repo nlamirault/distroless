@@ -16,6 +16,12 @@
     Advisory Database and open PRs with patches
 - The [Scorecard GitHub Action](https://github.com/ossf/scorecard-action)
   automates the process by running security checks on the GitHub repository.
+- [VEX (Vulnerability Exploitability eXchange)](https://openvex.dev/) statements
+  in `vex/` are applied to all container image scans via
+  [vexctl](https://github.com/openvex/vexctl). Scanner findings for CVEs that are
+  demonstrably not exploitable in our images are suppressed before results are
+  uploaded to GitHub Security. See [`vex/README.md`](vex/README.md) for the
+  criteria and process for adding new statements.
 
 ## Supported Versions
 

@@ -37,6 +37,11 @@ on: # yamllint disable-line rule:truthy
         type: string
         required: false
         default: "true"
+      vex-file:
+        description: "Path to the image-specific OpenVEX document (e.g. vex/infra-tools.openvex.json)"
+        type: string
+        required: false
+        default: ""
 
 env:
   REGISTRY: ghcr.io
@@ -250,6 +255,9 @@ jobs:
     - name: 🚚 Checkout
       uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
+    - name: 🎉 Setup vexctl
+      uses: openvex/setup-vexctl@v0.1.0
+
     - name: ✅ Scan image
       id: scan
       uses: anchore/scan-action@e1165082ffb1fe366ebaf02d8526e7c4989ea9d2 # v7.4.0
@@ -260,7 +268,55 @@ jobs:
         severity-cutoff: "high"
         output-format: "sarif"
 
-    - name: ⬆️ Upload SARIF
+    - name: 🔀 Merge all VEX documents
+      id: vex-merge
+      shell: bash
+      run: |
+        shopt -s nullglob
+        vex_files=(vex/*.openvex.json)
+        shopt -u nullglob
+        if [ "${#vex_files[@]}" -eq 0 ]; then
+          echo "skip=true" >> $GITHUB_OUTPUT
+          echo "No VEX files found — skipping merge"
+          exit 0
+        fi
+        echo "skip=false" >> $GITHUB_OUTPUT
+        echo "Merging ${#vex_files[@]} VEX file(s): ${vex_files[*]}"
+        vexctl merge "${vex_files[@]}" > merged.openvex.json
+        echo "merged.openvex.json contents:"
+        cat merged.openvex.json
+
+    - name: 🔒 Filter SARIF with VEX
+      id: vex-filter
+      if: steps.vex-merge.outputs.skip == 'false'
+      shell: bash
+      run: |
+        raw_sarif="${{ steps.scan.outputs.sarif }}"
+        filtered_sarif="filtered.sarif"
+        # Prefer the image-specific VEX file when provided; fall back to merged.
+        if [ -n "${{ inputs.vex-file }}" ] && [ -f "${{ inputs.vex-file }}" ]; then
+          vex_doc="${{ inputs.vex-file }}"
+          echo "Using image-specific VEX: ${vex_doc}"
+        else
+          vex_doc="merged.openvex.json"
+          echo "Using merged VEX document"
+        fi
+        vexctl filter "${raw_sarif}" --vex "${vex_doc}" > "${filtered_sarif}"
+        raw_count=$(jq '[.runs[].results // [] | length] | add // 0' "${raw_sarif}")
+        filtered_count=$(jq '[.runs[].results // [] | length] | add // 0' "${filtered_sarif}")
+        suppressed=$((raw_count - filtered_count))
+        echo "Raw findings: ${raw_count} | After VEX filter: ${filtered_count} | Suppressed: ${suppressed}"
+        echo "sarif=${filtered_sarif}" >> $GITHUB_OUTPUT
+
+    - name: ⬆️ Upload SARIF (VEX-filtered)
+      if: steps.vex-merge.outputs.skip == 'false'
+      uses: github/codeql-action/upload-sarif@8aad20d150bbac5944a9f9d289da16a4b0d87c1e # v4.36.2
+      with:
+        sarif_file: ${{ steps.vex-filter.outputs.sarif }}
+        category: ${{ github.workflow }}
+
+    - name: ⬆️ Upload SARIF (raw — no VEX files found)
+      if: steps.vex-merge.outputs.skip == 'true'
       uses: github/codeql-action/upload-sarif@8aad20d150bbac5944a9f9d289da16a4b0d87c1e # v4.36.2
       with:
         sarif_file: ${{ steps.scan.outputs.sarif }}

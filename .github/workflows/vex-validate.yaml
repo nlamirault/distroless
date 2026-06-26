@@ -1,0 +1,87 @@
+# SPDX-FileCopyrightText: Copyright (C) Nicolas Lamirault <nicolas.lamirault@gmail.com>
+# SPDX-License-Identifier: Apache-2.0
+
+---
+name: VEX / Validate
+
+on: # yamllint disable-line rule:truthy
+  pull_request:
+    paths:
+    - "vex/**"
+    - .github/workflows/vex-validate.yaml
+    - hack/scripts/validate-vex.sh
+  push:
+    branches:
+    - main
+    paths:
+    - "vex/**"
+    - .github/workflows/vex-validate.yaml
+    - hack/scripts/validate-vex.sh
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate OpenVEX documents
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🚚 Checkout
+      uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+
+    - name: 🎉 Setup vexctl
+      uses: openvex/setup-vexctl@v0.1.0
+
+    - name: 🔧 Run local schema validation
+      shell: bash
+      run: |
+        chmod +x hack/scripts/validate-vex.sh
+        hack/scripts/validate-vex.sh
+
+    - name: ✅ Run vexctl validate (spec-level check)
+      shell: bash
+      run: |
+        errors=0
+        for f in vex/*.openvex.json; do
+          echo "Validating ${f} with vexctl..."
+          if ! vexctl validate "${f}"; then
+            echo "FAIL: vexctl rejected ${f}"
+            errors=$((errors + 1))
+          else
+            echo "OK:   ${f}"
+          fi
+        done
+        if [ "$errors" -gt 0 ]; then
+          echo ""
+          echo "${errors} file(s) failed vexctl validation."
+          exit 1
+        fi
+        echo ""
+        echo "All VEX files passed vexctl validation."
+
+  merge-dry-run:
+    name: Merge VEX documents (dry run)
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🚚 Checkout
+      uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+
+    - name: 🎉 Setup vexctl
+      uses: openvex/setup-vexctl@v0.1.0
+
+    - name: 🔀 Merge all VEX documents (dry run)
+      shell: bash
+      run: |
+        shopt -s nullglob
+        vex_files=(vex/*.openvex.json)
+        shopt -u nullglob
+        if [ "${#vex_files[@]}" -eq 0 ]; then
+          echo "No VEX files found — nothing to merge."
+          exit 0
+        fi
+        echo "Merging ${#vex_files[@]} VEX file(s): ${vex_files[*]}"
+        vexctl merge "${vex_files[@]}" | tee merged.openvex.json
+        echo ""
+        echo "Merge succeeded. Statement count in merged doc:"
+        jq '.statements | length' merged.openvex.json
