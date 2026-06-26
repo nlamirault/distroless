@@ -1,7 +1,7 @@
 {
   "@context": "https://openvex.dev/ns/v0.2.0",
   "@id": "https://github.com/nicolaslamirault/atoma/vex/infra-tools",
-  "author": "nicolaslamirault",
+  "author": "nlamirault",
   "timestamp": "2026-06-24T00:00:00Z",
   "version": 1,
   "tooling": "hack/scripts/validate-vex.sh",
