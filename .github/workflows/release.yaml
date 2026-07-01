@@ -301,7 +301,7 @@ jobs:
           vex_doc="merged.openvex.json"
           echo "Using merged VEX document"
         fi
-        vexctl filter "${raw_sarif}" --vex "${vex_doc}" > "${filtered_sarif}"
+        vexctl filter "${raw_sarif}" "${vex_doc}" > "${filtered_sarif}"
         raw_count=$(jq '[.runs[].results // [] | length] | add // 0' "${raw_sarif}")
         filtered_count=$(jq '[.runs[].results // [] | length] | add // 0' "${filtered_sarif}")
         suppressed=$((raw_count - filtered_count))
