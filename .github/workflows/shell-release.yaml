@@ -10,19 +10,23 @@ on: # yamllint disable-line rule:truthy
     - published
   workflow_dispatch:
 
-permissions:
-  contents: read
-  packages: write
-  attestations: write
-  id-token: write
-  security-events: write
-  actions: read
+# Declare default permissions as read only.
+permissions: read-all
 
 jobs:
   publish:
+    permissions:
+      actions: read
+      attestations: write
+      contents: read
+      id-token: write
+      packages: write
+      security-events: write
+
     strategy:
       matrix:
         variant: [prod, dev]
+
     name: ${{ matrix.version }}${{ matrix.variant == 'dev' && '-dev' || '' }}
     uses: "./.github/workflows/release.yaml"
     with:
