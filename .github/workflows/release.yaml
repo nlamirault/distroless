@@ -46,6 +46,9 @@ on: # yamllint disable-line rule:truthy
 env:
   REGISTRY: ghcr.io
 
+permissions:
+  contents: read
+
 jobs:
   publish:
     permissions:
@@ -64,6 +67,11 @@ jobs:
       image: ${{ steps.vars.outputs.image }}
 
     steps:
+    - name: Harden the runner (Audit all outbound calls)
+      uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
+      with:
+        egress-policy: audit
+
     - name: 🚚 Checkout
       uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
@@ -252,11 +260,16 @@ jobs:
     needs: publish
     runs-on: ubuntu-latest
     steps:
+    - name: Harden the runner (Audit all outbound calls)
+      uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
+      with:
+        egress-policy: audit
+
     - name: 🚚 Checkout
       uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
     - name: 🎉 Setup vexctl
-      uses: openvex/setup-vexctl@v0.1.0
+      uses: openvex/setup-vexctl@d0cfef7e0264d6fbb83de3ce0a4cb13d61ab9cb2 # v0.1.0
 
     - name: ✅ Scan image
       id: scan
