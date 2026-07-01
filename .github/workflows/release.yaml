@@ -180,7 +180,7 @@ jobs:
           --use-signing-config=false \
           --oidc-provider=github-actions \
           --oidc-issuer=https://token.actions.githubusercontent.com \
-          ${{ steps.vars.outputs.image }}
+          ${{ steps.vars.outputs.registry }}/${{ inputs.repository }}@${{ steps.digest.outputs.digest }}
 
     - name: 🔓 Attest index SBOM
       shell: bash
