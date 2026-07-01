@@ -42,4 +42,5 @@ jobs:
       config-dir: images/shell
       tag: ${{ matrix.version }}${{ matrix.variant == 'dev' && '-dev' || '' }}
       target: ${{ matrix.variant }}
+      vex-file: vex/shell.openvex.json
     secrets: inherit
