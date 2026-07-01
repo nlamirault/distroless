@@ -21,20 +21,24 @@ on: # yamllint disable-line rule:truthy
     - "images/shell/**/*.yaml"
   workflow_dispatch:
 
-permissions:
-  contents: read
-  packages: write
-  attestations: write
-  id-token: write
-  security-events: write
-  actions: read
+# Declare default permissions as read only.
+permissions: read-all
 
 jobs:
   publish:
+    permissions:
+      actions: read
+      attestations: write
+      contents: read
+      id-token: write
+      packages: write
+      security-events: write
+
     strategy:
       matrix:
         version: [latest]
         variant: [prod, dev]
+
     name: ${{ matrix.version }}${{ matrix.variant == 'dev' && '-dev' || '' }}
     uses: "./.github/workflows/release.yaml"
     with:
