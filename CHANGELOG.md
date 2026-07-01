@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.6.0](https://github.com/nlamirault/atoma/compare/v0.5.0...v0.6.0) (2026-07-01)
+
+
+### 🚀 Features
+
+* **vex:** add openvex vex support to ci scan and validation workflows ([#73](https://github.com/nlamirault/atoma/issues/73)) ([4de6bde](https://github.com/nlamirault/atoma/commit/4de6bde11c698598c62783bfc6e1b793797af095))
+* **workflows:** increase rebuild frequency from weekly to every 6 hours ([#71](https://github.com/nlamirault/atoma/issues/71)) ([1640afd](https://github.com/nlamirault/atoma/commit/1640afd35dab27433ce000d338646a049ddf0e91))
+
+
+### 🐛 Bug Fixes
+
+* **github-actions:** correct SHA ([#74](https://github.com/nlamirault/atoma/issues/74)) ([345f970](https://github.com/nlamirault/atoma/commit/345f970c38b1986d285fbbc6ee6337c4bdfdf573))
+* **github-actions:** Correct Upload Sarif SHA ([#75](https://github.com/nlamirault/atoma/issues/75)) ([e7a5000](https://github.com/nlamirault/atoma/commit/e7a5000410a1426542e37778fc999bb8ed6a45df))
+
 ## [0.5.0](https://github.com/nlamirault/atoma/compare/v0.4.1...v0.5.0) (2026-06-24)
 
 
