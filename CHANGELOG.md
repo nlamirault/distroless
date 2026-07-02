@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.7.0](https://github.com/nlamirault/atoma/compare/v0.6.0...v0.7.0) (2026-07-02)
+
+
+### 🚀 Features
+
+* **deps:** clean dependency management ([#85](https://github.com/nlamirault/atoma/issues/85)) ([2f3a13c](https://github.com/nlamirault/atoma/commit/2f3a13c7c578ab760b73f15e30f5a4d5377167fb))
+
+
+### 🚨 Maintenance
+
+* **deps:** Bump actions/attest-build-provenance from 4.1.0 to 4.1.1 ([#83](https://github.com/nlamirault/atoma/issues/83)) ([6d798ee](https://github.com/nlamirault/atoma/commit/6d798eed9ab7bc067a444ce210aec7e303ddc468))
+* **deps:** Bump actions/checkout from 4.2.2 to 7.0.0 ([#80](https://github.com/nlamirault/atoma/issues/80)) ([f728392](https://github.com/nlamirault/atoma/commit/f72839212566075ec2c645a46dfcb5d0b9256e9a))
+* **deps:** Bump imjasonh/setup-crane from 0.6 to 0.7 ([#79](https://github.com/nlamirault/atoma/issues/79)) ([d589eca](https://github.com/nlamirault/atoma/commit/d589eca99f4daf4f1d082351e845c43c26ac8448))
+* **deps:** Bump openvex/setup-vexctl from 0.1.0 to 0.1.1 ([#82](https://github.com/nlamirault/atoma/issues/82)) ([9111e1b](https://github.com/nlamirault/atoma/commit/9111e1bb03d7103c3af8d09be8a410cb89e4a6ef))
+* **deps:** Bump ossf/scorecard-action from 2.4.0 to 2.4.3 ([#81](https://github.com/nlamirault/atoma/issues/81)) ([1781901](https://github.com/nlamirault/atoma/commit/178190140b4bc93ac2ed36685a909ce49210b99c))
+
 ## [0.6.0](https://github.com/nlamirault/atoma/compare/v0.5.0...v0.6.0) (2026-07-01)
 
 
